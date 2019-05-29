@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">Jobs in Pakistan</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="Categories">
+        <item>All Categories</item>
+        <item>Government</item>
+        <item>Marketing and Sales</item>
+        <item>Administrative and Clerical</item>
+        <item>Construction</item>
+        <item>IT</item>
+        <item>Accounting</item>
+    </string-array>
+
+    <string-array name="Cities">
+        <item>All Cities</item>
+        <item>Jobs in Karachi</item>
+        <item>Jobs in Lahore</item>
+        <item>Jobs in Quetta</item>
+        <item>Jobs in Peshawar</item>
+        <item>Jobs in Islamabad</item>
+        <item>Jobs in Outside Pakistan</item>
+    </string-array>
+
+    <string-array name="Newspaper">
+        <item>All NewsPaper</item>
+        <item>Daily Times</item>
+        <item>Daily Din NewsPaper</item>
+        <item>The Express Tribune</item>
+        <item>The Nation</item>
+        <item>Nai Baat</item>
+        <item>The Daily Kawish</item>
+    </string-array>
+
+    <string-array name="Companies">
+        <item>All Companies</item>
+        <item>PHED</item>
+        <item>PECHS</item>
+        <item>NRC</item>
+        <item>CART Sindh</item>
+        <item>Waheed Sons</item>
+        <item>PakLite Groups</item>
+    </string-array>
+
+    <string-array name="Sectors">
+        <item>All Sectors</item>
+        <item>Private</item>
+        <item>Overseas</item>
+        <item>Army</item>
+        <item>Government</item>
+    </string-array>
+
+</resources>
