@@ -2,33 +2,58 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
+
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_launcher_background"
-            android:title="Back To App" />
+            android:id="@+id/nav_colorMatch"
+            android:icon="@mipmap/lm_colormatch"
+            android:title="Color Match" />
+        <item
+            android:id="@+id/nav_scanColor"
+            android:icon="@mipmap/lm_scancolor"
+            android:title="Scan Color Number" />
+        <item
+            android:id="@+id/nav_painCalculator"
+            android:icon="@mipmap/lm_calc"
+            android:title="Paint Calculator" />
+
+        <item
+            android:id="@+id/nav_fav"
+            android:icon="@mipmap/lm_favourite"
+
+            android:title="Favourites" />
+        <item
+            android:id="@+id/nav_findStore"
+            android:icon="@mipmap/lm_storelocation"
+            android:title="Find a Store" />
+        <item
+            android:id="@+id/nav_designerPalettes"
+            android:icon="@mipmap/lm_pallets"
+            android:title="Designer Palletes" />
+
+        <item
+            android:id="@+id/nav_colorTrends"
+            android:icon="@mipmap/lm_colortrend"
+            android:title="Color Trends" />
+        <item
+            android:id="@+id/nav_colorAdvisory"
+            android:icon="@mipmap/lm_adviosry"
+            android:title="Color Advisory" />
+
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@mipmap/lm_setting"
+            android:title="Settings" />
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@mipmap/lm_help"
+            android:title="Help" />
+        <item
+            android:id="@+id/nav_Login"
+            android:icon="@mipmap/lm_login"
+            android:title="Login to MyB" />
 
 
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_search"
-                android:icon="@drawable/ic_action_action_search"
-                android:title="Advanced Search" />
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share This App" />
-            <item
-                android:id="@+id/nav_rate"
-                android:icon="@drawable/ic_menu_slideshow"
-                android:title="Rate This App" />
-            <item
-                android:id="@+id/nav_exit"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Exit" />
-        </menu>
-    </item>
 
 </menu>

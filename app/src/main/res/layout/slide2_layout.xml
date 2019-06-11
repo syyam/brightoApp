@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/slideImage"
+        android:layout_width="match_parent"
+        android:layout_height="445dp"
+        android:foregroundGravity="top"
+        android:scaleType = "centerCrop"
+        app:srcCompat="@mipmap/slide_colormatch" />
+
+    <TextView
+        android:id="@+id/slideTest"
+        android:gravity="center"
+        android:layout_below="@+id/slideImage"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:text="COLOR MATCH"
+        android:textColor="@color/Gray96"
+        />
+
+</RelativeLayout>

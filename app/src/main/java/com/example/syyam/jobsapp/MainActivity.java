@@ -2,6 +2,7 @@ package com.example.syyam.jobsapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.internal.NavigationMenuView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.design.widget.NavigationView;
@@ -9,6 +10,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,20 +18,99 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private class PageListener extends ViewPager.SimpleOnPageChangeListener { // to change tab icons on selection
+        public void onPageSelected(int position) {
+            int noOfPages = 6;
+            int currentPage = position;
+            if (currentPage == 0) {
+                tabLayout.getTabAt(0).setIcon(tabIconsSelected[0]);
+                tabLayout.getTabAt(1).setIcon(tabIcons[1]);
+                tabLayout.getTabAt(2).setIcon(tabIcons[2]);
+                tabLayout.getTabAt(3).setIcon(tabIcons[3]);
+                tabLayout.getTabAt(4).setIcon(tabIcons[4]);
+                tabLayout.getTabAt(5).setIcon(tabIcons[5]);
+
+            } else if (currentPage == 1) {
+                tabLayout.getTabAt(0).setIcon(tabIcons[0]);
+                tabLayout.getTabAt(1).setIcon(tabIconsSelected[1]);
+                tabLayout.getTabAt(2).setIcon(tabIcons[2]);
+                tabLayout.getTabAt(3).setIcon(tabIcons[3]);
+                tabLayout.getTabAt(4).setIcon(tabIcons[4]);
+                tabLayout.getTabAt(5).setIcon(tabIcons[5]);
+
+            } else if (currentPage == 2) {
+                tabLayout.getTabAt(0).setIcon(tabIcons[0]);
+                tabLayout.getTabAt(1).setIcon(tabIcons[1]);
+                tabLayout.getTabAt(2).setIcon(tabIconsSelected[2]);
+                tabLayout.getTabAt(3).setIcon(tabIcons[3]);
+                tabLayout.getTabAt(4).setIcon(tabIcons[4]);
+                tabLayout.getTabAt(5).setIcon(tabIcons[5]);
+            } else if (currentPage == 3) {
+                tabLayout.getTabAt(0).setIcon(tabIcons[0]);
+                tabLayout.getTabAt(1).setIcon(tabIcons[1]);
+                tabLayout.getTabAt(2).setIcon(tabIcons[2]);
+                tabLayout.getTabAt(3).setIcon(tabIconsSelected[3]);
+                tabLayout.getTabAt(4).setIcon(tabIcons[4]);
+                tabLayout.getTabAt(5).setIcon(tabIcons[5]);
+            } else if (currentPage == 4) {
+                tabLayout.getTabAt(0).setIcon(tabIcons[0]);
+                tabLayout.getTabAt(1).setIcon(tabIcons[1]);
+                tabLayout.getTabAt(2).setIcon(tabIcons[2]);
+                tabLayout.getTabAt(3).setIcon(tabIcons[3]);
+                tabLayout.getTabAt(4).setIcon(tabIconsSelected[4]);
+                tabLayout.getTabAt(5).setIcon(tabIcons[5]);
+            } else if (currentPage == 5) {
+                tabLayout.getTabAt(0).setIcon(tabIcons[0]);
+                tabLayout.getTabAt(1).setIcon(tabIcons[1]);
+                tabLayout.getTabAt(2).setIcon(tabIcons[2]);
+                tabLayout.getTabAt(3).setIcon(tabIcons[3]);
+                tabLayout.getTabAt(4).setIcon(tabIcons[4]);
+                tabLayout.getTabAt(5).setIcon(tabIconsSelected[5]);
+            }
+        }
+    }
+
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
+    private ViewPager Pager;
+    private int[] tabIcons = {
+            R.mipmap.menu_colorfinder,
+            R.mipmap.menu_productfinder,
+            R.mipmap.menu_colorselector,
+            R.mipmap.menu_luxury,
+            R.mipmap.menu_product,
+            R.mipmap.menu_store,
+    };
+
+    private int[] tabIconsSelected = {
+            R.mipmap.menu_colorfinder_select,
+            R.mipmap.menu_productfinder_select,
+            R.mipmap.menu_colorselector_select,
+            R.mipmap.menu_luxury_select,
+            R.mipmap.menu_product_select,
+            R.mipmap.menu_store_select,
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
-      TabLayout tabLayout =(TabLayout)findViewById(R.id.tabs);
-        ViewPager Pager =(ViewPager)findViewById(R.id.viewpager);
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        Pager = (ViewPager) findViewById(R.id.viewpager);
 
         tabpagerAdapter Tabpageradapter = new tabpagerAdapter(getSupportFragmentManager());
         Pager.setAdapter(Tabpageradapter);
         tabLayout.setupWithViewPager(Pager);
+        setupTabIcons();
+
+        PageListener pagelistener = new PageListener();
+        Pager.setOnPageChangeListener(pagelistener);
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -39,6 +120,21 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        NavigationMenuView navMenuView = (NavigationMenuView) navigationView.getChildAt(0);
+        navMenuView.addItemDecoration(new DividerItemDecoration(MainActivity.this, DividerItemDecoration.VERTICAL));
+
+    }
+
+    private void setupTabIcons() {
+
+
+        tabLayout.getTabAt(0).setIcon(tabIconsSelected[0]);
+        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
+        tabLayout.getTabAt(2).setIcon(tabIcons[2]);
+        tabLayout.getTabAt(3).setIcon(tabIcons[3]);
+        tabLayout.getTabAt(4).setIcon(tabIcons[4]);
+        tabLayout.getTabAt(5).setIcon(tabIcons[5]);
     }
 
     @Override
@@ -67,8 +163,11 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
-            Intent L=new Intent(this,SearchActivity.class);
-            startActivity(L);        }
+            Intent L = new Intent(this, SearchActivity.class);
+            startActivity(L);
+        }
+
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -79,19 +178,25 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_search) {
-            Intent L=new Intent(this,SearchActivity.class);
+
+        if (id == R.id.nav_Login) {
+            Intent L = new Intent(this, LoginActivity.class);
             startActivity(L);
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_rate) {
-
-        } else if (id == R.id.nav_exit) {
-
         }
+
+//        if (id == R.id.nav_home) {
+//            // Handle the camera action
+//        } else if (id == R.id.nav_search) {
+//            Intent L = new Intent(this, SearchActivity.class);
+//            startActivity(L);
+//
+//        } else if (id == R.id.nav_share) {
+//
+//        } else if (id == R.id.nav_rate) {
+//
+//        } else if (id == R.id.nav_exit) {
+//
+//        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
