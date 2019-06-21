@@ -1,13 +1,13 @@
 package com.example.syyam.jobsapp;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.text.Html;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,20 +24,22 @@ public class SplashActivity extends Activity {
     private Button mSkipBtn;
 
     private int mCurrentPage;
-    private int check=0;
+    private int check = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
 
 
         mSlideViewPager = (ViewPager) findViewById(R.id.slideViewPager);
         mDotsLayout = (LinearLayout) findViewById(R.id.dotsLayout);
 
-        mNextBtn=(Button) findViewById(R.id.nextBtn);
-        mSkipBtn=(Button) findViewById(R.id.skipBtn);
+        mNextBtn = (Button) findViewById(R.id.nextBtn);
+        mSkipBtn = (Button) findViewById(R.id.skipBtn);
 
         sliderAdapter = new SliderAdapter(this);
 
@@ -59,18 +61,19 @@ public class SplashActivity extends Activity {
         mNextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mSlideViewPager.setCurrentItem(mCurrentPage+1);
+                mSlideViewPager.setCurrentItem(mCurrentPage + 1);
 
 
-                if(mCurrentPage == 3 ){
+                if (mCurrentPage == 3) {
 
                     check++;
                 }
 
-                if(check==2){ // buggy, I hope on one take a note of it
+                if (check == 2) { // buggy, I hope on one take a note of it
 
-                    check=0;
-                    Intent l=new Intent(SplashActivity.this,MainActivity.class);
+                    check = 0;
+                    Intent l = new Intent(SplashActivity.this, CountryActivity.class);
+                    finish();
                     startActivity(l);
 
                 }
@@ -80,7 +83,8 @@ public class SplashActivity extends Activity {
         mSkipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent l=new Intent(SplashActivity.this,MainActivity.class);
+                Intent l = new Intent(SplashActivity.this, CountryActivity.class);
+                finish();
                 startActivity(l);
             }
         });
@@ -90,8 +94,8 @@ public class SplashActivity extends Activity {
         mDots = new TextView[4]; //hardcoded, change it with sliderAdapter slide_text.length
 
         mDotsLayout.removeAllViews();
-        for(int i=0;i<mDots.length;i++){
-            mDots[i]=new TextView(this);
+        for (int i = 0; i < mDots.length; i++) {
+            mDots[i] = new TextView(this);
             mDots[i].setText(Html.fromHtml("&#8226;"));
             mDots[i].setTextSize(35);
             mDots[i].setTextColor(getResources().getColor(R.color.Gray96));
@@ -99,7 +103,7 @@ public class SplashActivity extends Activity {
             mDotsLayout.addView(mDots[i]);
         }
 
-        if(mDots.length>0){
+        if (mDots.length > 0) {
             mDots[position].setTextColor(getResources().getColor(R.color.colorPrimary));
         }
 
@@ -116,13 +120,12 @@ public class SplashActivity extends Activity {
 
             addDotsIndicatot(position);
 
-            mCurrentPage=position;
+            mCurrentPage = position;
 
-            if(position==mDots.length-1){
+            if (position == mDots.length - 1) {
                 mNextBtn.setText("FINISH");
 
-            }
-            else {
+            } else {
                 mNextBtn.setText("NEXT");
             }
 

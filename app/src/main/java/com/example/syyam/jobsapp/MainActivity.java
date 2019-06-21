@@ -15,8 +15,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import net.skoumal.fragmentback.BackFragmentHelper;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
 
     private class PageListener extends ViewPager.SimpleOnPageChangeListener { // to change tab icons on selection
         public void onPageSelected(int position) {
@@ -73,6 +76,7 @@ public class MainActivity extends AppCompatActivity
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager Pager;
+    private DrawerLayout drawer;
     private int[] tabIcons = {
             R.mipmap.menu_colorfinder,
             R.mipmap.menu_productfinder,
@@ -112,7 +116,7 @@ public class MainActivity extends AppCompatActivity
         Pager.setOnPageChangeListener(pagelistener);
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -142,9 +146,15 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        } else if (!BackFragmentHelper.fireOnBackPressedEvent(this)) {
+            // lets do the default back action if fragments don't consume it
+            //super.onBackPressed();
         } else {
-            super.onBackPressed();
+            //super.onBackPressed();
         }
+
+        // first ask your fragments to handle back-pressed event
+
     }
 
     @Override
@@ -168,7 +178,6 @@ public class MainActivity extends AppCompatActivity
         }
 
 
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -182,6 +191,13 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_Login) {
             Intent L = new Intent(this, LoginActivity.class);
             startActivity(L);
+        }
+        if (id == R.id.nav_designerPalettes) {
+            Intent L = new Intent(this, DesignerPalettes.class);
+            startActivity(L);
+        } else {
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
         }
 
 //        if (id == R.id.nav_home) {
@@ -198,8 +214,8 @@ public class MainActivity extends AppCompatActivity
 //
 //        }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         return true;
     }
 }

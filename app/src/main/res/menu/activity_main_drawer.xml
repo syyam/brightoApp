@@ -28,7 +28,7 @@
         <item
             android:id="@+id/nav_designerPalettes"
             android:icon="@mipmap/lm_pallets"
-            android:title="Designer Palletes" />
+            android:title="Designer Palettes" />
 
         <item
             android:id="@+id/nav_colorTrends"

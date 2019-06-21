@@ -1,30 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/relativeLayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <LinearLayout
-        android:layout_width="120dp"
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="wrap_content"
+        android:layout_margin="0dp"
         android:layout_height="190dp"
-        android:orientation="horizontal"
-        android:id="@+id/colorBox"
-        >
+        app:cardCornerRadius="0dp">
 
-        <TextView
 
-            android:id="@+id/colorNameBox"
+        <LinearLayout
+            android:id="@+id/colorBox"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:text="asd"
-
-            android:textSize="16dp"
+            android:layout_height="match_parent"
             android:gravity="bottom"
-            android:layout_marginLeft="10dp"
-            android:paddingBottom="10dp"
-            android:textColor="#000"
+            android:orientation="horizontal">
 
-            >
+            <TextView
 
-        </TextView>
-    </LinearLayout>
+                android:id="@+id/colorNameBox"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:text="asd"
+                android:textColor="#fff"
+                android:textSize="16dp"
+
+                >
+
+            </TextView>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 </RelativeLayout>

@@ -1,24 +1,29 @@
 package com.example.syyam.jobsapp;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.syyam.jobsapp.Models.Datum;
+import com.example.syyam.jobsapp.Models.ShadesFamilyDatum;
 
 import java.util.List;
 
 public class ColorShadesAdapter extends RecyclerView.Adapter<ColorShadesAdapter.CF_ViewHolder> {
 
     private Context context;
-    private List<Datum> shades;
+    private List<ShadesFamilyDatum> shades;
 
-    public ColorShadesAdapter(Context context, List<Datum> shades) {
+    public ColorShadesAdapter(Context context, List<ShadesFamilyDatum> shades) {
         this.context = context;
         this.shades = shades;
     }
@@ -27,8 +32,8 @@ public class ColorShadesAdapter extends RecyclerView.Adapter<ColorShadesAdapter.
     @Override
     public CF_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        LayoutInflater inflater=LayoutInflater.from(parent.getContext());
-        View view=inflater.inflate(R.layout.item_colorshades,parent,false);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.item_colorshades, parent, false);
         return new CF_ViewHolder(view);
     }
 
@@ -36,38 +41,35 @@ public class ColorShadesAdapter extends RecyclerView.Adapter<ColorShadesAdapter.
     public void onBindViewHolder(@NonNull CF_ViewHolder holder, int position) {
 
 
-        final Datum colors = this.shades.get(position);
+        final ShadesFamilyDatum colors = this.shades.get(position);
 
-        int r= colors.getColors().getR();
-
-
-        holder.mTextView.setText(colors.getName());
-
-
+        final int R = colors.getColor().getR();
+        final int G = colors.getColor().getG();
+        final int B = colors.getColor().getB();
 
 
 //        final Datum colors = this.colors.get(position);
 
-//        int R = colors.getColors().getR();
-//        int G = colors.getColors().getG();
-//        int B = colors.getColors().getB();
 
-
-//        if (colors.getName().equals("White")){ // if background color is white text color will become black
-//            holder.mTextView.setTextColor(Color.rgb(0, 0, 0));
-//        }
-//        holder.mLinearLayout.setBackgroundColor(Color.rgb(R, G, B));
-//        holder.mTextView.setText(colors.getName());
+        if (colors.getName().equals("White")) { // if background color is white text color will become black
+            holder.mTextView.setTextColor(Color.rgb(0, 0, 0));
+        }
+        holder.mTextView.setText(colors.getName());
+        holder.mCardView.setBackgroundColor(Color.rgb(R, G, B));
 
 
         holder.mLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent s= new Intent(view.getContext(), ColorShadesActivity.class);
-//
-//                s.putExtra("color_id", colors.getId());
-//                s.putExtra("country_id",1);
-//                view.getContext().startActivity(s);
+                Intent s = new Intent(view.getContext(), SpecificShade.class);
+
+                s.putExtra("R", colors.getColor().getR().toString());
+                s.putExtra("G", colors.getColor().getG().toString());
+                s.putExtra("B", colors.getColor().getB().toString());
+                s.putExtra("name", colors.getName());
+                s.putExtra("desc", colors.getDescription());
+                s.putExtra("itemCode", colors.getItemCode());
+                view.getContext().startActivity(s);
 
 
             }
@@ -83,11 +85,14 @@ public class ColorShadesAdapter extends RecyclerView.Adapter<ColorShadesAdapter.
     public class CF_ViewHolder extends RecyclerView.ViewHolder {
         private TextView mTextView;
         private LinearLayout mLinearLayout;
+        private CardView mCardView;
 
         public CF_ViewHolder(View itemView) {
             super(itemView);
             mTextView = itemView.findViewById(R.id.colorNameBox);
             mLinearLayout = itemView.findViewById(R.id.colorBox);
+            mCardView = itemView.findViewById(R.id.cardView);
+
         }
     }
 }

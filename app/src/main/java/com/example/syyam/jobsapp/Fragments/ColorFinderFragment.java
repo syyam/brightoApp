@@ -1,6 +1,8 @@
 package com.example.syyam.jobsapp.Fragments;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -33,8 +35,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ColorFinderFragment extends Fragment {
 
 
-
     RecyclerView recyclerView;
+    Context mContext;
+
     public ColorFinderFragment() {
         // Required empty public constructor
     }
@@ -46,16 +49,14 @@ public class ColorFinderFragment extends Fragment {
         // Inflate the layout for this fragment
 
 
-
         View rootView = inflater.inflate(R.layout.fragment_colorfinder, container, false);
-        recyclerView=(RecyclerView) rootView.findViewById(R.id.colorFinderList);
+
+        mContext = rootView.getContext();
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.colorFinderList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-
-
         getData();
-
 
 
         return rootView;
@@ -70,20 +71,28 @@ public class ColorFinderFragment extends Fragment {
 
         API retrofitController = build.create(API.class);
 
-        Call<ColorFinder> colorFinderCall=retrofitController.getColorFinder();//empty because nothing is being sent in header
+
+        SharedPreferences prefs = mContext.getSharedPreferences("Country", mContext.MODE_PRIVATE);
+        final int cid = prefs.getInt("countryId", 0); //0 is the default value.
+
+
+        //Config.getToken(getContext())
+        Call<ColorFinder> colorFinderCall = retrofitController.getColorFinder();//empty because nothing is being sent in header
         colorFinderCall.enqueue(new Callback<ColorFinder>() {
             @Override
             public void onResponse(Call<ColorFinder> call, Response<ColorFinder> response) {
 
-                ColorFinder list=response.body();
-                recyclerView.setAdapter(new ColorFinderAdapter(ColorFinderFragment.this, list.getData()));
+                if (response != null) {
+                    ColorFinder list = response.body();
+                    recyclerView.setAdapter(new ColorFinderAdapter(ColorFinderFragment.this, list.getData(), cid));
 
-                //Toast.makeText(getContext(), "success",Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getContext(), "success",Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override
             public void onFailure(Call<ColorFinder> call, Throwable t) {
-                Toast.makeText(getContext(),"Failure",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Failure", Toast.LENGTH_LONG).show();
             }
         });
     }

@@ -1,6 +1,6 @@
 package com.example.syyam.jobsapp.Models.params;
 
-public class ShadesParam {
+public class CountryFamilyParam {
 
     private int country_id;
     private int family_id;

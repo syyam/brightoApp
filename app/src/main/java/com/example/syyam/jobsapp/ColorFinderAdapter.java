@@ -1,6 +1,8 @@
 package com.example.syyam.jobsapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -19,23 +21,27 @@ public class ColorFinderAdapter extends RecyclerView.Adapter<ColorFinderAdapter.
 
     private ColorFinderFragment context;
     private List<Datum> colors;
+    int cid;
 
-    public ColorFinderAdapter(ColorFinderFragment context, List<Datum> colors) {
+    public ColorFinderAdapter(ColorFinderFragment context, List<Datum> colors, int cid) {
         this.context = context;
         this.colors = colors;
+        this.cid = cid;
+
     }
 
     @NonNull
     @Override
     public CF_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        LayoutInflater inflater=LayoutInflater.from(parent.getContext());
-        View view=inflater.inflate(R.layout.item_colorfinder,parent,false);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.item_colorfinder, parent, false);
         return new CF_ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CF_ViewHolder holder, int position) {
+
 
         final Datum colors = this.colors.get(position);
 
@@ -44,7 +50,12 @@ public class ColorFinderAdapter extends RecyclerView.Adapter<ColorFinderAdapter.
         int B = colors.getColors().getB();
 
 
-        if (colors.getName().equals("White")){ // if background color is white text color will become black
+
+//        SharedPreferences prefs = holder.mContext.getSharedPreferences("Country", holder.mContext.MODE_PRIVATE);
+//        CID =prefs.getInt("countryId",0); //0 is the default value.
+
+
+        if (colors.getName().equals("White")) { // if background color is white text color will become black
             holder.mTextView.setTextColor(Color.rgb(0, 0, 0));
         }
         holder.mLinearLayout.setBackgroundColor(Color.rgb(R, G, B));
@@ -54,12 +65,11 @@ public class ColorFinderAdapter extends RecyclerView.Adapter<ColorFinderAdapter.
         holder.mLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent s= new Intent(view.getContext(), ColorShadesActivity.class);
+                Intent s = new Intent(view.getContext(), ColorShadesActivity.class);
 
-                int a=colors.getId();
+                int a = colors.getId();
                 s.putExtra("color_id", colors.getId().toString());
-                //TODO: make country id dynamic when you make ChoooseCountryActivity
-                s.putExtra("country_id","2");
+                s.putExtra("country_id", cid + "");
 
                 view.getContext().startActivity(s);
 
@@ -77,6 +87,9 @@ public class ColorFinderAdapter extends RecyclerView.Adapter<ColorFinderAdapter.
     public class CF_ViewHolder extends RecyclerView.ViewHolder {
         private TextView mTextView;
         private LinearLayout mLinearLayout;
+        int countryId = 0;
+        private Context mContext;
+
 
         public CF_ViewHolder(View itemView) {
             super(itemView);

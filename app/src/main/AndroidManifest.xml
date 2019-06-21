@@ -14,9 +14,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ColorShadesActivity"></activity>
-        <activity android:name=".Fragments.LoginFragment" />
-        <activity android:name=".LoginActivity" />
+        <activity
+            android:name=".ColorShadesActivity"
+            android:theme="@style/AppTheme.Transparent" />
+        <activity
+            android:name=".SpecificShade"
+            android:theme="@style/AppTheme.Transparent" />
+        <activity
+            android:name=".Fragments.LoginFragment"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".LoginActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <activity android:name=".ColorCapture" />
         <activity
             android:name=".MainActivity"
@@ -30,6 +41,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CountryActivity" />
+        <activity
+            android:name=".ProductDetails"
+            android:theme="@style/AppTheme.Transparent" />
+        <activity android:name=".ProductTypes" />
+        <activity android:name=".ProductFilter" />
+        <activity android:name=".DesignerPalettes"></activity>
     </application>
 
 </manifest>

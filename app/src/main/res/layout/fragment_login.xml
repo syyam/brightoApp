@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f2f2f2"
     tools:context="com.example.nipu.navigationwithtabs.six">
 
     <LinearLayout
@@ -10,78 +9,122 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:gravity="center"
-        android:orientation="vertical"
-        >
-
-
+        android:orientation="vertical">
 
 
         <ImageView
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:layout_marginTop="80dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/logo_brighto" />
 
-        <TextView
-            android:layout_marginTop="100dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Login to have Access to all App features"
-            />
 
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:orientation="horizontal"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/customborder"
-            >
+            android:layout_height="0dp"
+            android:layout_gravity="bottom"
+            android:layout_weight="1">
 
-            <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:padding="15dp"
-                android:src="@mipmap/ca_email" />
-            <EditText
-                android:paddingLeft="10dp"
-                android:background="@color/GrayD3"
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:textColor="@color/Gray96"
                 android:layout_height="match_parent"
-                android:hint="Email"
-                android:textSize="16sp"
-                />
+                android:layout_gravity="bottom"
+                android:gravity="center|bottom"
+                android:orientation="vertical">
 
-        </LinearLayout>
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dip"
-            android:layout_weight="1"
-            android:gravity="center|bottom"
-            android:orientation="vertical"
-
-            >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Login to have Access to all App features"
+                    android:textColor="@color/Gray96" />
 
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
 
-            <Button
-                android:layout_gravity="center_horizontal|center"
-                android:layout_width="match_parent"
-                android:layout_marginBottom="20dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/colorPrimary"
-                android:text="Submit"
-                android:textColor="#fff" />
-        </LinearLayout>
+                    >
 
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/auth_field_logo_border"
+                        android:padding="12dp"
+
+                        android:src="@mipmap/ca_email" />
+
+                    <EditText
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/auth_field_border"
+                        android:hint="Email"
+                        android:inputType="textEmailAddress"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/Gray41"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+
+                    >
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/auth_field_logo_border"
+                        android:padding="12dp"
+                        android:src="@mipmap/login_password" />
+
+                    <EditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/auth_field_border"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/Gray41"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="end"
+                    android:padding="5dp"
+                    android:text="Forgot Password?"
+                    android:textColor="@color/colorPrimary"
+
+                    />
+
+                <Button
+                    android:id="@+id/submitBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/colorPrimary"
+                    android:text="Submit"
+                    android:textColor="#fff" />
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
-
 </FrameLayout>

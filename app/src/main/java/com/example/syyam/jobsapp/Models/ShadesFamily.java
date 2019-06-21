@@ -12,7 +12,7 @@ public class ShadesFamily {
     private Boolean success;
     @SerializedName("data")
     @Expose
-    private List<Datum> data = null;
+    private List<ShadesFamilyDatum> data = null;
 
     public Boolean getSuccess() {
         return success;
@@ -22,11 +22,11 @@ public class ShadesFamily {
         this.success = success;
     }
 
-    public List<Datum> getData() {
+    public List<ShadesFamilyDatum> getData() {
         return data;
     }
 
-    public void setData(List<Datum> data) {
+    public void setData(List<ShadesFamilyDatum> data) {
         this.data = data;
     }
 
