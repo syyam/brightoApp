@@ -4,6 +4,7 @@ import com.example.syyam.jobsapp.Models.CategorySpecific;
 import com.example.syyam.jobsapp.Models.ColorFinder;
 import com.example.syyam.jobsapp.Models.Countries;
 import com.example.syyam.jobsapp.Models.DealerCity;
+import com.example.syyam.jobsapp.Models.DesignerPalettesModel.DesignerPalettes;
 import com.example.syyam.jobsapp.Models.FinishSpecific;
 import com.example.syyam.jobsapp.Models.Like;
 import com.example.syyam.jobsapp.Models.Login;
@@ -18,10 +19,12 @@ import com.example.syyam.jobsapp.Models.params.CategoryParam;
 import com.example.syyam.jobsapp.Models.params.CountryParam;
 import com.example.syyam.jobsapp.Models.params.CityParam;
 import com.example.syyam.jobsapp.Models.params.LoginParam;
+import com.example.syyam.jobsapp.Models.params.PaletteParam;
 import com.example.syyam.jobsapp.Models.params.ProductParam;
 import com.example.syyam.jobsapp.Models.params.ProjectTypeParam;
 import com.example.syyam.jobsapp.Models.params.RegisterParam;
 import com.example.syyam.jobsapp.Models.params.CountryFamilyParam;
+import com.example.syyam.jobsapp.Models.params.ShadeParam;
 import com.example.syyam.jobsapp.Models.params.SurfaceParam;
 
 import retrofit2.Call;
@@ -50,6 +53,14 @@ public interface API {
     @POST("shades/product")
     Call<ShadesProduct> getShadesProduct(@Body ProductParam productParam);
 
+    //6
+    @POST("favourite/shade/like")
+    Call<Like> getLikeShade(@Header("Authorization") String token, @Body ShadeParam shadeParam);
+
+    //7
+    @POST("favourite/shade/unlike")
+    Call<Like> getUnLikeShade(@Header("Authorization") String token, @Body ShadeParam shadeParam);
+
     //9
     @GET("project-type")
     Call<ProductType> getProductType();
@@ -69,14 +80,6 @@ public interface API {
     //13
     @POST("products/filter")
     Call<Products> getProductsFilter(@Body FilterParam filterParam);
-
-    //27
-    @POST("login")
-    Call<Login> getLogin(@Body LoginParam loginParam);
-
-    //26
-    @POST("signup")
-    Call<Register> getRegister(@Body RegisterParam registerParam);
 
     //21
     @GET("country")
@@ -114,5 +117,23 @@ public interface API {
     @POST("favourite/products/unlike")
     Call<Like> getUnLike(@Header("Authorization") String token, @Body ProductParam productParam);
 
+    //27
+    @POST("login")
+    Call<Login> getLogin(@Body LoginParam loginParam);
 
+    //26
+    @POST("signup")
+    Call<Register> getRegister(@Body RegisterParam registerParam);
+
+    //31
+    @GET("pallet")
+    Call<DesignerPalettes> getDesignerPalettes();
+
+    //33
+    @POST("favourite/pallets/like")
+    Call<Like> getLikePalettes(@Header("Authorization") String token, @Body PaletteParam paletteParam);
+
+    //34
+    @POST("favourite/pallets/unlike")
+    Call<Like> getUnLikePalettes(@Header("Authorization") String token, @Body PaletteParam paletteParam);
 }

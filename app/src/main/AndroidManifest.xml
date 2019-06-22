@@ -14,6 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".DesignerPaletteDetails"></activity>
+        <activity android:name=".DesignerPalettedActivity" />
         <activity
             android:name=".ColorShadesActivity"
             android:theme="@style/AppTheme.Transparent" />
@@ -25,9 +27,8 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".LoginActivity"
-            android:windowSoftInputMode="adjustPan"
             android:theme="@style/AppTheme.NoActionBar"
-            />
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ColorCapture" />
         <activity
             android:name=".MainActivity"
@@ -47,7 +48,6 @@
             android:theme="@style/AppTheme.Transparent" />
         <activity android:name=".ProductTypes" />
         <activity android:name=".ProductFilter" />
-        <activity android:name=".DesignerPalettes"></activity>
     </application>
 
 </manifest>

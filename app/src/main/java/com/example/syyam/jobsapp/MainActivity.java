@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(L);
         }
         if (id == R.id.nav_designerPalettes) {
-            Intent L = new Intent(this, DesignerPalettes.class);
+            Intent L = new Intent(this, DesignerPalettedActivity.class);
             startActivity(L);
         } else {
             drawer.closeDrawer(GravityCompat.START);

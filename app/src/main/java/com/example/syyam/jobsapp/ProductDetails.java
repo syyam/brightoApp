@@ -275,13 +275,13 @@ public class ProductDetails extends AppCompatActivity implements NavigationView.
         ProductParam productParam = new ProductParam();
         productParam.setProduct_id(pid);
 
-        Call<Like> productsCall = retrofitController.getLike(Config.getToken(this), productParam);
-//        if (sender.equals("loved")) {
-//            productsCall = retrofitController.getLike(Config.getToken(this), productParam);
-//        }
-//        if (sender.equals("not_loved")) {
-//            productsCall = retrofitController.getUnLike(Config.getToken(this), productParam);
-//        }
+        Call<Like> productsCall = null;
+        if (sender.equals("loved")) {
+            productsCall = retrofitController.getLike(Config.getToken(this), productParam);
+        }
+        if (sender.equals("not_loved")) {
+            productsCall = retrofitController.getUnLike(Config.getToken(this), productParam);
+        }
 
 
         //Config.getToken(getContext())
@@ -295,8 +295,12 @@ public class ProductDetails extends AppCompatActivity implements NavigationView.
 
                     if (list != null) {
                         Toast.makeText(ProductDetails.this, list.getMessage().toString(), Toast.LENGTH_LONG).show();
+
+                        if (list.getMessage() == null) {
+                            Toast.makeText(ProductDetails.this, list.getErrors().toString(), Toast.LENGTH_LONG).show();
+                        }
                     } else {
-                        Toast.makeText(ProductDetails.this, "", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ProductDetails.this, "An error occured", Toast.LENGTH_LONG).show();
                     }
 
                 }
@@ -304,7 +308,7 @@ public class ProductDetails extends AppCompatActivity implements NavigationView.
 
             @Override
             public void onFailure(Call<Like> call, Throwable t) {
-                Toast.makeText(ProductDetails.this, "Failure" + t, Toast.LENGTH_LONG).show();
+                Toast.makeText(ProductDetails.this, "Failure: " + t, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -385,6 +389,10 @@ public class ProductDetails extends AppCompatActivity implements NavigationView.
 
         if (id == R.id.nav_Login) {
             Intent L = new Intent(this, LoginActivity.class);
+            startActivity(L);
+        }
+        if (id == R.id.nav_designerPalettes) {
+            Intent L = new Intent(this, DesignerPalettedActivity.class);
             startActivity(L);
         } else {
             dl.closeDrawer(GravityCompat.START);

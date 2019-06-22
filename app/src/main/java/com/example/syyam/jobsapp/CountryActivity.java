@@ -22,7 +22,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CountryActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private Object data;
     private Button submitBtn;
 
     @Override

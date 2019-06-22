@@ -21,6 +21,8 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
     private TabLayout tabLayout;
     private ViewPager Pager;
 
+    private DrawerLayout drawer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +41,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
         tabLayout.setupWithViewPager(Pager);
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_login);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout_login);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -74,6 +76,14 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
             Intent L = new Intent(this, LoginActivity.class);
             startActivity(L);
         }
+        if (id == R.id.nav_designerPalettes) {
+            Intent L = new Intent(this, DesignerPalettedActivity.class);
+            startActivity(L);
+        }
+        else {
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+        }
 
 //        if (id == R.id.nav_home) {
 //            // Handle the camera action
@@ -89,8 +99,8 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
 //
 //        }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 }

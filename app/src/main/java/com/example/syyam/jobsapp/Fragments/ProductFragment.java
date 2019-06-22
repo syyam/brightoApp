@@ -122,7 +122,7 @@ public class ProductFragment extends Fragment {
         countryParam.setCountry_id(cid);
 
         //Config.getToken(getContext())
-        Call<Products> productsCall = retrofitController.getProducts(countryParam);//empty because nothing is being sent in header
+        Call<Products> productsCall = retrofitController.getProducts(countryParam);
         productsCall.enqueue(new Callback<Products>() {
             @Override
             public void onResponse(Call<Products> call, Response<Products> response) {

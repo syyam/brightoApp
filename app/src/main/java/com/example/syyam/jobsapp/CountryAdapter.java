@@ -47,9 +47,18 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CF_ViewH
 
         final CountryDatum countries = this.shades.get(position);
 
+        final List<CountryDatum> country = this.shades;
+
         String name = countries.getName().toString();
 
+
+        final int[] send_id = {this.shades.get(0).getId()};
+
+
         holder.mTextView.setText(name);
+
+        holder.editor.putInt("countryId", country.get(lastSelectedPosition).getId()); //default 1st id will be sent if n field is selected
+        holder.editor.apply();
 
 
         //TODO: radio button should be fixed
@@ -61,10 +70,10 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CF_ViewH
                 lastSelectedPosition = holder.getAdapterPosition();
                 notifyDataSetChanged();
 
-                holder.editor.putInt("countryId", countries.getId());
+
+                holder.editor.putInt("countryId", country.get(lastSelectedPosition).getId());
                 holder.editor.apply();
 
-                //Toast.makeText(context, countries.getId()+"",Toast.LENGTH_SHORT ).show();
 
             }
         });
@@ -75,13 +84,12 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CF_ViewH
                 lastSelectedPosition = holder.getAdapterPosition();
                 notifyDataSetChanged();
 
-                holder.editor.putInt("countryId", countries.getId());
+                holder.editor.putInt("countryId", country.get(lastSelectedPosition).getId());
                 holder.editor.apply();
 
             }
         });
 
-        holder.id = countries.getId();
 
     }
 
@@ -95,7 +103,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CF_ViewH
         private TextView mTextView;
         private RadioButton radioButton;
         private RadioGroup radioGroup;
-        private int id;
+        private int id = 4;
         private LinearLayout LL;
 
 
@@ -107,7 +115,6 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CF_ViewH
             mTextView = itemView.findViewById(R.id.countryName);
             radioButton = itemView.findViewById(R.id.radio_btn);
             radioGroup = itemView.findViewById(R.id.radioGroup1);
-
             LL = itemView.findViewById(R.id.LL);
 
 

@@ -1,6 +1,7 @@
 package com.example.syyam.jobsapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -23,10 +24,25 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.syyam.jobsapp.Models.Like;
+import com.example.syyam.jobsapp.Models.params.ProductParam;
+import com.example.syyam.jobsapp.Models.params.ShadeParam;
+import com.example.syyam.jobsapp.Utils.Config;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SpecificShade extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    int r, g, b;
+    private Menu mMenu;
+    private Boolean loved = false;
+
+    int r, g, b, s_id;
     String name, desc, itemCode;
     LinearLayout linearLayout;
     TextView nameTV, descTV, itemcodeTV;
@@ -93,11 +109,13 @@ public class SpecificShade extends AppCompatActivity implements NavigationView.O
                 getIntent().hasExtra("B") &&
                 getIntent().hasExtra("name") &&
                 getIntent().hasExtra("desc") &&
+                getIntent().hasExtra("sid") &&
                 getIntent().hasExtra("itemCode")) {
 
             String R = getIntent().getStringExtra("R");
             String G = getIntent().getStringExtra("G");
             String B = getIntent().getStringExtra("B");
+            String SID = getIntent().getStringExtra("sid");
 
             String getName = getIntent().getStringExtra("name");
             String getDesc = getIntent().getStringExtra("desc");
@@ -110,12 +128,14 @@ public class SpecificShade extends AppCompatActivity implements NavigationView.O
                             !TextUtils.isEmpty(B) &&
                             !TextUtils.isEmpty(getName) &&
                             !TextUtils.isEmpty(getDesc) &&
+                            !TextUtils.isEmpty(SID) &&
                             !TextUtils.isEmpty(getItemCode)
-                    ) {
+            ) {
 
                 r = Integer.parseInt(getIntent().getStringExtra("R"));
                 g = Integer.parseInt(getIntent().getStringExtra("G"));
                 b = Integer.parseInt(getIntent().getStringExtra("B"));
+                s_id = Integer.parseInt(getIntent().getStringExtra("sid"));
 
                 name = getIntent().getStringExtra("name");
                 desc = getIntent().getStringExtra("desc");
@@ -138,11 +158,65 @@ public class SpecificShade extends AppCompatActivity implements NavigationView.O
 
     }
 
+    public void loveCall(String sender) {
+
+
+        Retrofit build = new Retrofit
+                .Builder()
+                .baseUrl(Config.BASE_URL_AUTH)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        API retrofitController = build.create(API.class);
+
+        ShadeParam shadeParam = new ShadeParam();
+        shadeParam.setShade_id(s_id);
+
+        Call<Like> productsCall = null;
+        if (sender.equals("loved")) {
+            productsCall = retrofitController.getLikeShade(Config.getToken(this), shadeParam);
+        }
+        if (sender.equals("not_loved")) {
+            productsCall = retrofitController.getUnLikeShade(Config.getToken(this), shadeParam);
+        }
+
+
+        //Config.getToken(getContext())
+
+        productsCall.enqueue(new Callback<Like>() {
+            @Override
+            public void onResponse(Call<Like> call, Response<Like> response) {
+
+                if (response != null) {
+                    Like list = response.body();
+
+                    if (list != null) {
+                        Toast.makeText(SpecificShade.this, list.getMessage().toString(), Toast.LENGTH_LONG).show();
+
+                        if (list.getMessage() == null) {
+                            Toast.makeText(SpecificShade.this, list.getErrors().toString(), Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        Toast.makeText(SpecificShade.this, "An error occured", Toast.LENGTH_LONG).show();
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Like> call, Throwable t) {
+                Toast.makeText(SpecificShade.this, "Failure: " + t, Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_fav_share_back, menu);
+        mMenu = menu;
+
         return true;
     }
 
@@ -156,7 +230,6 @@ public class SpecificShade extends AppCompatActivity implements NavigationView.O
         if (t.onOptionsItemSelected(item)) {
             return true;
         }
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
             Intent L = new Intent(this, SearchActivity.class);
             startActivity(L);
@@ -169,6 +242,37 @@ public class SpecificShade extends AppCompatActivity implements NavigationView.O
 
         }
         if (id == R.id.action_fav) {
+
+            MenuItem item_ = mMenu.findItem(R.id.action_fav);
+
+            if (mMenu != null) {
+
+
+                if (!loved) {
+                    String token;
+                    SharedPreferences prefs = getSharedPreferences(Config.MY_PREFS_NAME, MODE_PRIVATE);
+                    token = prefs.getString("token", null);
+
+                    if (token == null) { //if user is signed in only then make him like the product
+                        Toast.makeText(SpecificShade.this, "You need to sign in.", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        item_.setIcon(R.mipmap.favorite_selected);
+                        loved = true;
+                        loveCall("loved");
+                        return true;
+                    }
+
+
+                }
+                if (loved) {
+                    item_.setIcon(R.mipmap.top_favourite);
+                    loved = false;
+                    loveCall("not_loved");
+                    return true;
+                }
+
+            }
 
         }
 
@@ -184,6 +288,10 @@ public class SpecificShade extends AppCompatActivity implements NavigationView.O
 
         if (id == R.id.nav_Login) {
             Intent L = new Intent(this, LoginActivity.class);
+            startActivity(L);
+        }
+        if (id == R.id.nav_designerPalettes) {
+            Intent L = new Intent(this, DesignerPalettedActivity.class);
             startActivity(L);
         } else {
             dl.closeDrawer(GravityCompat.START);
