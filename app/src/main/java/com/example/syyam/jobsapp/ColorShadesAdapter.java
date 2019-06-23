@@ -58,6 +58,8 @@ public class ColorShadesAdapter extends RecyclerView.Adapter<ColorShadesAdapter.
         holder.mCardView.setBackgroundColor(Color.rgb(R, G, B));
 
 
+
+        //TODO: dont send data, use api instead.
         holder.mLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".DesignerPaletteDetails"></activity>
+        <activity android:name=".DesignerPaletteDetails" />
         <activity android:name=".DesignerPalettedActivity" />
         <activity
             android:name=".ColorShadesActivity"
@@ -48,6 +48,9 @@
             android:theme="@style/AppTheme.Transparent" />
         <activity android:name=".ProductTypes" />
         <activity android:name=".ProductFilter" />
+        <activity
+            android:name=".FavouriteActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

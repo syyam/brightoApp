@@ -7,6 +7,8 @@ import com.example.syyam.jobsapp.Models.DealerCity;
 import com.example.syyam.jobsapp.Models.DesignerPalettesModel.DesignerPalettes;
 import com.example.syyam.jobsapp.Models.FinishSpecific;
 import com.example.syyam.jobsapp.Models.Like;
+import com.example.syyam.jobsapp.Models.LikedProducts;
+import com.example.syyam.jobsapp.Models.LikedShades;
 import com.example.syyam.jobsapp.Models.Login;
 import com.example.syyam.jobsapp.Models.ProductDetailModel.ProductDetailCity;
 import com.example.syyam.jobsapp.Models.ProductType;
@@ -14,10 +16,12 @@ import com.example.syyam.jobsapp.Models.Products;
 import com.example.syyam.jobsapp.Models.Register;
 import com.example.syyam.jobsapp.Models.ShadesFamily;
 import com.example.syyam.jobsapp.Models.ShadesProduct.ShadesProduct;
+import com.example.syyam.jobsapp.Models.SpecificShadeModel.SpecificShadeModel;
 import com.example.syyam.jobsapp.Models.SurfaceSpecific;
 import com.example.syyam.jobsapp.Models.params.CategoryParam;
 import com.example.syyam.jobsapp.Models.params.CountryParam;
 import com.example.syyam.jobsapp.Models.params.CityParam;
+import com.example.syyam.jobsapp.Models.params.IdParam;
 import com.example.syyam.jobsapp.Models.params.LoginParam;
 import com.example.syyam.jobsapp.Models.params.PaletteParam;
 import com.example.syyam.jobsapp.Models.params.ProductParam;
@@ -49,6 +53,10 @@ public interface API {
     @POST("shades/family")
     Call<ShadesFamily> getColorShades(@Body CountryFamilyParam countryFamilyParam);
 
+    //3
+    @POST("shade/id")
+    Call<SpecificShadeModel> getSpecificShade(@Body IdParam idParam);
+
     //4
     @POST("shades/product")
     Call<ShadesProduct> getShadesProduct(@Body ProductParam productParam);
@@ -60,6 +68,10 @@ public interface API {
     //7
     @POST("favourite/shade/unlike")
     Call<Like> getUnLikeShade(@Header("Authorization") String token, @Body ShadeParam shadeParam);
+
+    //8
+    @GET("favourite/shades")
+    Call<LikedShades> getLikedShades(@Header("Authorization") String token);
 
     //9
     @GET("project-type")
@@ -116,6 +128,10 @@ public interface API {
     //19
     @POST("favourite/products/unlike")
     Call<Like> getUnLike(@Header("Authorization") String token, @Body ProductParam productParam);
+
+    //20
+    @GET("favourite/products")
+    Call<LikedProducts> getLikedProducts(@Header("Authorization") String token);
 
     //27
     @POST("login")

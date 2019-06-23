@@ -4,39 +4,39 @@
     android:layout_height="match_parent">
 
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="fill_parent"
+        android:layout_gravity="bottom"
+        android:fillViewport="true">
 
-
-        <ImageView
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/logo_brighto" />
-
-
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="bottom"
-            android:layout_weight="1"
-            >
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/logo_brighto" />
 
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center|bottom"
                 android:layout_gravity="bottom"
+                android:gravity="center|bottom"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:text="Register to have Access to all App features"
                     android:textColor="@color/Gray96" />
 
@@ -59,12 +59,12 @@
                         android:src="@mipmap/login_user" />
 
                     <EditText
-                        android:id="@+id/fName"
-                        android:inputType="textPersonName"
+                        android:id="@+id/userName"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/auth_field_border"
-                        android:hint="First Name"
+                        android:hint="User Name"
+                        android:inputType="textPersonName"
                         android:paddingLeft="10dp"
                         android:textColor="@color/Gray41"
                         android:textSize="14sp" />
@@ -90,12 +90,43 @@
                         android:src="@mipmap/login_user" />
 
                     <EditText
+                        android:id="@+id/fName"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/auth_field_border"
+                        android:hint="First Name"
                         android:inputType="textPersonName"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/Gray41"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+
+                    >
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/auth_field_logo_border"
+                        android:padding="12dp"
+
+                        android:src="@mipmap/login_user" />
+
+                    <EditText
                         android:id="@+id/lName"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/auth_field_border"
                         android:hint="Last Name"
+                        android:inputType="textPersonName"
                         android:paddingLeft="10dp"
                         android:textColor="@color/Gray41"
                         android:textSize="14sp" />
@@ -157,8 +188,8 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/auth_field_border"
                         android:hint="Password"
-                        android:paddingLeft="10dp"
                         android:inputType="textPassword"
+                        android:paddingLeft="10dp"
                         android:textColor="@color/Gray41"
                         android:textSize="14sp" />
 
@@ -166,6 +197,7 @@
 
 
                 <Button
+                    android:id="@+id/submitBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center"
@@ -177,9 +209,9 @@
 
                     android:textColor="#fff" />
             </LinearLayout>
-        </ScrollView>
 
-    </LinearLayout>
 
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

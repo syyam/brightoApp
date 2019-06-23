@@ -88,7 +88,6 @@ public class ProductTypes extends AppCompatActivity
     public void onItemClicked(int position, Integer id, String sender) {
         // call back here
 
-
         SenderName = sender;
         senderId = id;
         //make a condition to use one of them by sending a parameter
