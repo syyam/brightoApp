@@ -71,6 +71,7 @@ public class DesignerPalettesAdapter extends RecyclerView.Adapter<DesignerPalett
         final DP_Datum palettes = this.shades.get(position);
 
         final String name = palettes.getName();
+        final int[] likeCount = {palettes.getLikes()};
 
         final int r1 = palettes.getColor1().getColor().getR();
         final int g1 = palettes.getColor1().getColor().getG();
@@ -132,10 +133,14 @@ public class DesignerPalettesAdapter extends RecyclerView.Adapter<DesignerPalett
                     if (!holder.loved) {
                         callback.onItemClicked(position, palettes.getId(), holder.loved);
                         holder.loved = true;
+                        likeCount[0]++;
+                        holder.likes.setText(likeCount[0] + " Likes");
                         holder.fav.setImageResource(context.getResources().getIdentifier(R.mipmap.favorite_selected + "", "drawable", context.getPackageName()));
                     } else {
                         callback.onItemClicked(position, palettes.getId(), holder.loved);
                         holder.loved = false;
+                        likeCount[0]--;
+                        holder.likes.setText(likeCount[0] + " Likes");
                         holder.fav.setImageResource(context.getResources().getIdentifier(R.mipmap.top_favourite + "", "drawable", context.getPackageName()));
                     }
                 }
@@ -208,6 +213,7 @@ public class DesignerPalettesAdapter extends RecyclerView.Adapter<DesignerPalett
         private ImageView fav;
         private boolean loved = false;
         private int PID;
+        private int likeCount;
 
 
         //SharedPreferences.Editor editor = context.getSharedPreferences("Country", Context.MODE_PRIVATE).edit();
@@ -225,7 +231,6 @@ public class DesignerPalettesAdapter extends RecyclerView.Adapter<DesignerPalett
             C3 = itemView.findViewById(R.id.color3);
 
             fav = itemView.findViewById(R.id.fav);
-
 
 //            fav.setOnClickListener(new View.OnClickListener() {
 //                @Override

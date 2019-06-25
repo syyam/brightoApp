@@ -290,12 +290,13 @@ public class SpecificShade extends AppCompatActivity implements NavigationView.O
             startActivity(L);
         }
 
+
         if (id == R.id.action_back) {
             finish();
         }
-        if (id == R.id.action_share) {
-
-        }
+//        if (id == R.id.action_share) {
+//
+//        }
         if (id == R.id.action_fav) {
 
             MenuItem item_ = mMenu.findItem(R.id.action_fav);
@@ -348,24 +349,23 @@ public class SpecificShade extends AppCompatActivity implements NavigationView.O
         if (id == R.id.nav_designerPalettes) {
             Intent L = new Intent(this, DesignerPalettedActivity.class);
             startActivity(L);
+        }
+        if (id == R.id.nav_fav) {
+            Intent L = new Intent(this, FavouriteActivity.class);
+            startActivity(L);
+        }
+        if (id == R.id.nav_myproject) {
+            Intent intent = new Intent(this, MyProject.class);
+            startActivity(intent);
+        }
+        if (id == R.id.nav_setting) {
+            Intent L = new Intent(this, SettingsActivity.class);
+            startActivity(L);
         } else {
             dl.closeDrawer(GravityCompat.START);
             return true;
         }
 
-//        if (id == R.id.nav_home) {
-//            // Handle the camera action
-//        } else if (id == R.id.nav_search) {
-//            Intent L = new Intent(this, SearchActivity.class);
-//            startActivity(L);
-//
-//        } else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_rate) {
-//
-//        } else if (id == R.id.nav_exit) {
-//
-//        }
 
 //        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 

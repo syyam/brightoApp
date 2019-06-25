@@ -30,12 +30,14 @@ import com.example.syyam.jobsapp.Models.params.RegisterParam;
 import com.example.syyam.jobsapp.Models.params.CountryFamilyParam;
 import com.example.syyam.jobsapp.Models.params.ShadeParam;
 import com.example.syyam.jobsapp.Models.params.SurfaceParam;
+import com.example.syyam.jobsapp.Models.params.UpdateUserParam;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 
 public interface API {
@@ -152,4 +154,9 @@ public interface API {
     //34
     @POST("favourite/pallets/unlike")
     Call<Like> getUnLikePalettes(@Header("Authorization") String token, @Body PaletteParam paletteParam);
+
+    //users
+    @PUT("user/id")
+    Call<Like> putUpdateUser(@Body UpdateUserParam updateUserParam);
+
 }

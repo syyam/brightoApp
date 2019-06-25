@@ -88,6 +88,14 @@ public class ProductTypesAdapter extends RecyclerView.Adapter<ProductTypesAdapte
 //            }
 //        });
 
+        holder.mLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (callback != null) {
+                    callback.onItemClicked(position, colors.getId(), "first");
+                }
+            }
+        });
         holder.radioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

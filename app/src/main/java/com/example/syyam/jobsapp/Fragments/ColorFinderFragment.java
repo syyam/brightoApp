@@ -73,7 +73,7 @@ public class ColorFinderFragment extends Fragment {
 
 
         SharedPreferences prefs = mContext.getSharedPreferences("Country", mContext.MODE_PRIVATE);
-        final int cid = prefs.getInt("countryId", 0); //0 is the default value.
+        final int cid = prefs.getInt("countryId", -1); //0 is the default value.
 
 
         //Config.getToken(getContext())

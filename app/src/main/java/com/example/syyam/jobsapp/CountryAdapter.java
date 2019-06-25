@@ -58,8 +58,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CF_ViewH
 
         holder.mTextView.setText(name);
 
-        holder.editor.putInt("countryId", country.get(0).getId()); //default 1st id will be sent if no field is selected
-        holder.editor.apply();
+
 
 
         //TODO: radio button should be fixed

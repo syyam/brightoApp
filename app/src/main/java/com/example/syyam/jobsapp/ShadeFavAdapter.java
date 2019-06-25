@@ -106,6 +106,7 @@ public class ShadeFavAdapter extends RecyclerView.Adapter<ShadeFavAdapter.CF_Vie
         private LinearLayout LL;
 
 
+
         public CF_ViewHolder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.name);

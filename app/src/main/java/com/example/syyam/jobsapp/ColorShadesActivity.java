@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.syyam.jobsapp.Models.ShadesFamily;
 import com.example.syyam.jobsapp.Models.params.CountryFamilyParam;
 import com.example.syyam.jobsapp.Utils.Config;
+import com.gw.swipeback.SwipeBackLayout;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,46 +25,53 @@ public class ColorShadesActivity extends AppCompatActivity {
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
-                private int spanCount;
-                private int spacing;
-                private boolean includeEdge;
+        private int spanCount;
+        private int spacing;
+        private boolean includeEdge;
 
-                public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
-                    this.spanCount = spanCount;
-                    this.spacing = spacing;
-                    this.includeEdge = includeEdge;
+        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
+            this.spanCount = spanCount;
+            this.spacing = spacing;
+            this.includeEdge = includeEdge;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            int position = parent.getChildAdapterPosition(view); // item position
+            int column = position % spanCount; // item column
+
+            if (includeEdge) {
+                outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
+                outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
+
+                if (position < spanCount) { // top edge
+                    outRect.top = spacing;
                 }
-
-                @Override
-                public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                    int position = parent.getChildAdapterPosition(view); // item position
-                    int column = position % spanCount; // item column
-
-                    if (includeEdge) {
-                        outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
-                        outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
-
-                        if (position < spanCount) { // top edge
-                            outRect.top = spacing;
-                        }
-                        outRect.bottom = spacing; // item bottom
-                    } else {
-                        outRect.left = spacing; // column * ((1f / spanCount) * spacing)
-                        outRect.right = spacing; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
-                        if (position >= spanCount) {
-                            outRect.top = spacing; // item top
-                        }
-                    }
+                outRect.bottom = spacing; // item bottom
+            } else {
+                outRect.left = spacing; // column * ((1f / spanCount) * spacing)
+                outRect.right = spacing; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
+                if (position >= spanCount) {
+                    outRect.top = spacing; // item top
                 }
+            }
+        }
     }
 
     private int color_id, country_id;
     private RecyclerView recyclerView;
 
     @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_shades);
+
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(false);
@@ -124,7 +132,8 @@ public class ColorShadesActivity extends AppCompatActivity {
             public void onResponse(Call<ShadesFamily> call, Response<ShadesFamily> response) {
 
                 ShadesFamily list = response.body();
-                recyclerView.setAdapter(new ColorShadesAdapter(ColorShadesActivity.this, list.getData()));
+                if (list != null)
+                    recyclerView.setAdapter(new ColorShadesAdapter(ColorShadesActivity.this, list.getData(), null));
 
                 //Toast.makeText(getContext(), "success",Toast.LENGTH_LONG).show();
             }

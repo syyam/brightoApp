@@ -165,7 +165,7 @@ public class StoreFragment extends Fragment implements StoreAdapter.AdapterCallb
             public void onResponse(Call<Countries> call, Response<Countries> response) {
 
                 Countries list = response.body();
-                recyclerView.setAdapter(new StoreAdapter(StoreFragment.this, list.getData(), (StoreAdapter.AdapterCallback) StoreFragment.this));
+                recyclerView.setAdapter(new StoreAdapter(getContext(), list.getData(), (StoreAdapter.AdapterCallback) StoreFragment.this));
 
                 //Toast.makeText(getContext(), "success",Toast.LENGTH_LONG).show();
             }
@@ -199,7 +199,7 @@ public class StoreFragment extends Fragment implements StoreAdapter.AdapterCallb
 
                 DealerCity list = response.body();
                 recyclerView.invalidate();
-                recyclerView.setAdapter(new StoreDealerCityAdapter(StoreFragment.this, list.getData()));
+                recyclerView.setAdapter(new StoreDealerCityAdapter(getContext(), list.getData(), null));
 
             }
 
@@ -233,7 +233,7 @@ public class StoreFragment extends Fragment implements StoreAdapter.AdapterCallb
 
                 Countries list = response.body();
                 recyclerView.invalidate();
-                recyclerView.setAdapter(new StoreCityAdapter(StoreFragment.this, list.getData(), (StoreCityAdapter.AdapterCallback) StoreFragment.this));
+                recyclerView.setAdapter(new StoreCityAdapter(getContext(), list.getData(), (StoreCityAdapter.AdapterCallback) StoreFragment.this));
 
             }
 

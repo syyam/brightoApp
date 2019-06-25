@@ -1,5 +1,6 @@
 package com.example.syyam.jobsapp;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,7 +20,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.CF_ViewHolde
     private AdapterCallback mAdapterCallback;
 
 
-    private StoreFragment context;
+    private Context context;
     private List<CountryDatum> shades;
     private int lastSelectedPosition = -1;
     AdapterCallback callback;
@@ -30,7 +31,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.CF_ViewHolde
     }
 
 
-    public StoreAdapter(StoreFragment context, List<CountryDatum> shades, AdapterCallback callback) {
+    public StoreAdapter(Context context, List<CountryDatum> shades, AdapterCallback callback) {
         this.context = context;
         this.shades = shades;
         this.callback = callback;

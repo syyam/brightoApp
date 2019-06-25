@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:layout_marginTop="20dp"
+            android:gravity="center|top"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="top"
+                android:gravity="center|top"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Change Information"
+                    android:textColor="@color/Gray96" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+
+                    >
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/auth_field_logo_border"
+                        android:padding="12dp"
+
+                        android:src="@mipmap/login_user" />
+
+                    <EditText
+                        android:id="@+id/fName"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/auth_field_border"
+                        android:hint="First Name"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/Gray41"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+
+                    >
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/auth_field_logo_border"
+                        android:padding="12dp"
+
+                        android:src="@mipmap/login_user" />
+
+                    <EditText
+                        android:id="@+id/lName"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/auth_field_border"
+                        android:hint="Last Name"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/Gray41"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Change Password"
+                    android:textColor="@color/Gray96" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+
+                    >
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/auth_field_logo_border"
+                        android:padding="12dp"
+                        android:src="@mipmap/login_password" />
+
+                    <EditText
+                        android:id="@+id/oldPass"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/auth_field_border"
+                        android:hint="Old Password"
+                        android:inputType="textPassword"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/Gray41"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+
+                    >
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/auth_field_logo_border"
+                        android:padding="12dp"
+                        android:src="@mipmap/login_password" />
+
+                    <EditText
+                        android:id="@+id/newPass"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/auth_field_border"
+                        android:hint="New Password"
+                        android:inputType="textPassword"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/Gray41"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+
+                    >
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/auth_field_logo_border"
+                        android:padding="12dp"
+                        android:src="@mipmap/login_password" />
+
+                    <EditText
+                        android:id="@+id/confirmPass"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/auth_field_border"
+                        android:hint="Confirm Password"
+                        android:inputType="textPassword"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/Gray41"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Change Country"
+                    android:textColor="@color/Gray96" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/countryList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp">
+
+                </android.support.v7.widget.RecyclerView>
+
+
+                <Button
+                    android:id="@+id/submitBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/colorPrimary"
+                    android:text="Submit"
+
+                    android:textColor="#fff" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</RelativeLayout>
