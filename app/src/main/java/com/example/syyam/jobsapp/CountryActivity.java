@@ -1,6 +1,9 @@
 package com.example.syyam.jobsapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,6 +32,10 @@ public class CountryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_country);
+
+        SharedPreferences.Editor editor = getSharedPreferences("Country", Context.MODE_PRIVATE).edit();
+        editor.putInt("countryId", 1); //default 1st id will be sent if no field is selected
+        editor.apply();
 
         recyclerView = (RecyclerView) findViewById(R.id.countryList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

@@ -10,10 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.syyam.jobsapp.Models.Datum;
 import com.example.syyam.jobsapp.Models.ShadesFamilyDatum;
 
 import java.util.List;
@@ -22,10 +20,12 @@ public class ColorShadesAdapter extends RecyclerView.Adapter<ColorShadesAdapter.
 
     private Context context;
     private List<ShadesFamilyDatum> shades;
+    ProductTypesAdapter.AdapterCallback callback;
 
-    public ColorShadesAdapter(Context context, List<ShadesFamilyDatum> shades) {
+    public ColorShadesAdapter(Context context, List<ShadesFamilyDatum> shades, ProductTypesAdapter.AdapterCallback callback) {
         this.context = context;
         this.shades = shades;
+        this.callback = callback;
     }
 
     @NonNull
@@ -38,7 +38,7 @@ public class ColorShadesAdapter extends RecyclerView.Adapter<ColorShadesAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CF_ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CF_ViewHolder holder, final int position) {
 
 
         final ShadesFamilyDatum colors = this.shades.get(position);
@@ -51,30 +51,37 @@ public class ColorShadesAdapter extends RecyclerView.Adapter<ColorShadesAdapter.
 //        final Datum colors = this.colors.get(position);
 
 
-        if (colors.getName().equals("White")) { // if background color is white text color will become black
+        if (colors.getName().equals("White"))  // if background color is white text color will become black
             holder.mTextView.setTextColor(Color.rgb(0, 0, 0));
-        }
         holder.mTextView.setText(colors.getName());
         holder.mCardView.setBackgroundColor(Color.rgb(R, G, B));
 
-
-        holder.mLinearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent s = new Intent(view.getContext(), SpecificShade.class);
-
-                s.putExtra("sid", colors.getId().toString());
-                s.putExtra("R", colors.getColor().getR().toString());
-                s.putExtra("G", colors.getColor().getG().toString());
-                s.putExtra("B", colors.getColor().getB().toString());
-                s.putExtra("name", colors.getName());
-                s.putExtra("desc", colors.getDescription());
-                s.putExtra("itemCode", colors.getItemCode());
-                view.getContext().startActivity(s);
-
-
-            }
-        });
+        if(callback == null) {
+            holder.mLinearLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent s = new Intent(view.getContext(), SpecificShade.class);
+                    s.putExtra("sid", colors.getId().toString());
+                    s.putExtra("R", colors.getColor().getR().toString());
+                    s.putExtra("G", colors.getColor().getG().toString());
+                    s.putExtra("B", colors.getColor().getB().toString());
+                    s.putExtra("name", colors.getName());
+                    s.putExtra("desc", colors.getDescription());
+                    s.putExtra("itemCode", colors.getItemCode());
+                    view.getContext().startActivity(s);
+                }
+            });
+        }
+        else{
+            holder.mLinearLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (callback != null) {
+                        callback.onItemClicked(position, colors.getId(), "first");
+                    }
+                }
+            });
+        }
 
     }
 

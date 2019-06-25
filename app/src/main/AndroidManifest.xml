@@ -23,6 +23,10 @@
             android:value="AIzaSyBn5OOUzH27W_DQpiBC_mjXIUFXQ-PMv_w" />
 
         <activity android:name=".FilterActivity.FilterActivity"></activity>
+        <activity android:name=".FetchDealer"></activity>
+        <activity android:name=".FetchShade" />
+        <activity android:name=".FetchProduct" />
+        <activity android:name=".MyProject" />
         <activity android:name=".DesignerPaletteDetails" />
         <activity android:name=".DesignerPalettedActivity" />
         <activity
@@ -72,6 +76,9 @@
             android:name="com.example.syyam.CalculateActivity"
             android:theme="@style/AppTheme.NoActionBar"
             />
+            android:name=".FavouriteActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SettingsActivity"></activity>
     </application>
 
 </manifest>

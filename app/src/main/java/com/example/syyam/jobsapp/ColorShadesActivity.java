@@ -14,6 +14,7 @@ import com.example.syyam.jobsapp.Models.ShadesFamily;
 import com.example.syyam.jobsapp.Models.params.CountryFamilyParam;
 import com.example.syyam.jobsapp.Utils.Config;
 import com.example.syyam.jobsapp.Utils.Extras;
+import com.gw.swipeback.SwipeBackLayout;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -62,9 +63,16 @@ public class ColorShadesActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
 
     @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_shades);
+
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(false);
@@ -126,7 +134,8 @@ public class ColorShadesActivity extends AppCompatActivity {
             public void onResponse(Call<ShadesFamily> call, Response<ShadesFamily> response) {
                 Extras.hideLoader();
                 ShadesFamily list = response.body();
-                recyclerView.setAdapter(new ColorShadesAdapter(ColorShadesActivity.this, list.getData()));
+                if (list != null)
+                    recyclerView.setAdapter(new ColorShadesAdapter(ColorShadesActivity.this, list.getData(), null));
 
                 //Toast.makeText(getContext(), "success",Toast.LENGTH_LONG).show();
             }

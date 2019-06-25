@@ -80,19 +80,17 @@ public class ProductTypesThirdAdapter extends RecyclerView.Adapter<ProductTypesT
         holder.radioButton.setChecked(lastSelectedPosition == position);
 
 
-//        holder.mLinearLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//
-//
-//                if (callback != null) {
-//                    callback.onItemClicked(position, colors.getId(), "third");
-//                }
-//
-//
-//            }
-//        });
+        holder.mLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (callback != null) {
+                    callback.onItemClicked(position, colors.getId(), "third");
+                }
+
+
+            }
+        });
 
         holder.radioButton.setOnClickListener(new View.OnClickListener() {
             @Override

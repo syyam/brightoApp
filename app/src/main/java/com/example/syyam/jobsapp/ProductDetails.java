@@ -102,6 +102,12 @@ public class ProductDetails extends AppCompatActivity implements NavigationView.
     }
 
     @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
@@ -354,9 +360,9 @@ public class ProductDetails extends AppCompatActivity implements NavigationView.
         if (id == R.id.action_back) {
             finish();
         }
-        if (id == R.id.action_share) {
-
-        }
+//        if (id == R.id.action_share) {
+//
+//        }
         if (id == R.id.action_fav) {
 
             MenuItem item_ = mMenu.findItem(R.id.action_fav);

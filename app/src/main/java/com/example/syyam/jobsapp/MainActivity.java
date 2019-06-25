@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager Pager;
-    private DrawerLayout drawer;
+        private DrawerLayout drawer;
     private int[] tabIcons = {
             R.mipmap.menu_colorfinder,
             R.mipmap.menu_productfinder,
@@ -217,6 +217,18 @@ public class MainActivity extends AppCompatActivity
         }
         if (id == R.id.nav_designerPalettes) {
             Intent L = new Intent(this, DesignerPalettedActivity.class);
+            startActivity(L);
+        }
+        if (id == R.id.nav_fav) {
+            Intent L = new Intent(this, FavouriteActivity.class);
+            startActivity(L);
+        }
+        if (id == R.id.nav_myproject) {
+            Intent intent = new Intent(this, MyProject.class);
+            startActivity(intent);
+        }
+        if (id == R.id.nav_setting) {
+            Intent L = new Intent(this, SettingsActivity.class);
             startActivity(L);
         } else {
             drawer.closeDrawer(GravityCompat.START);

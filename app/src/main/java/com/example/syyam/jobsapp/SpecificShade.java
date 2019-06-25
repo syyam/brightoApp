@@ -15,6 +15,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,6 +29,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.syyam.jobsapp.Models.Like;
+import com.example.syyam.jobsapp.Models.SpecificShadeModel.SpecificShadeModel;
+import com.example.syyam.jobsapp.Models.params.IdParam;
 import com.example.syyam.jobsapp.Models.params.ProductParam;
 import com.example.syyam.jobsapp.Models.params.ShadeParam;
 import com.example.syyam.jobsapp.Utils.Config;
@@ -46,7 +50,8 @@ public class SpecificShade extends AppCompatActivity implements NavigationView.O
     int r, g, b, s_id;
     String name, desc, itemCode;
     LinearLayout linearLayout;
-    TextView nameTV, descTV, itemcodeTV;
+    TextView nameTV, descTV, itemcodeTV, productName;
+
 
     private DrawerLayout dl;
     private ActionBarDrawerToggle t;
@@ -131,7 +136,7 @@ public class SpecificShade extends AppCompatActivity implements NavigationView.O
                             !TextUtils.isEmpty(getDesc) &&
                             !TextUtils.isEmpty(SID) &&
                             !TextUtils.isEmpty(getItemCode)
-            ) {
+                    ) {
 
                 r = Integer.parseInt(getIntent().getStringExtra("R"));
                 g = Integer.parseInt(getIntent().getStringExtra("G"));
@@ -151,12 +156,62 @@ public class SpecificShade extends AppCompatActivity implements NavigationView.O
         nameTV = (TextView) findViewById(R.id.name);
         descTV = (TextView) findViewById(R.id.description);
         itemcodeTV = (TextView) findViewById(R.id.itemCode);
+        productName = (TextView) findViewById(R.id.productName);
 
-        linearLayout.setBackgroundColor(Color.rgb(r, g, b));
-        nameTV.setText(name);
-        descTV.setText(desc);
-        itemcodeTV.setText(itemCode);
+//        linearLayout.setBackgroundColor(Color.rgb(r, g, b));
+//        nameTV.setText(name);
+//        descTV.setText(desc);
+//        itemcodeTV.setText(itemCode);
 
+        Data();
+
+    }
+
+    public void Data() {
+        Retrofit build = new Retrofit
+                .Builder()
+                .baseUrl(Config.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        API retrofitController = build.create(API.class);
+
+
+//        SharedPreferences prefs = mContext.getSharedPreferences("Country", mContext.MODE_PRIVATE);
+//        final int cid = prefs.getInt("countryId", 0); //0 is the default value.
+
+        IdParam id = new IdParam();
+        id.setId(s_id);
+
+        //Config.getToken(getContext())
+
+        Call<SpecificShadeModel> productsCall = retrofitController.getSpecificShade(id);
+        productsCall.enqueue(new Callback<SpecificShadeModel>() {
+            @Override
+            public void onResponse(Call<SpecificShadeModel> call, Response<SpecificShadeModel> response) {
+
+                if (response != null) {
+                    SpecificShadeModel list = response.body();
+
+
+                    int _r = list.getData().get(0).getColor().getR();
+                    int _g = list.getData().get(0).getColor().getG();
+                    int _b = list.getData().get(0).getColor().getB();
+
+                    linearLayout.setBackgroundColor(Color.rgb(_r, _g, _b));
+                    nameTV.setText(list.getData().get(0).getName().toString());
+                    descTV.setText(list.getData().get(0).getDescription());
+                    itemcodeTV.setText(list.getData().get(0).getItemCode());
+                    productName.setText(list.getData().get(0).getProducts().get(0).getName());
+                    //Toast.makeText(getContext(), "success",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SpecificShadeModel> call, Throwable t) {
+                Toast.makeText(SpecificShade.this, "Failure", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public void loveCall(String sender) {
@@ -237,12 +292,13 @@ public class SpecificShade extends AppCompatActivity implements NavigationView.O
             startActivity(L);
         }
 
+
         if (id == R.id.action_back) {
             finish();
         }
-        if (id == R.id.action_share) {
-
-        }
+//        if (id == R.id.action_share) {
+//
+//        }
         if (id == R.id.action_fav) {
 
             MenuItem item_ = mMenu.findItem(R.id.action_fav);
@@ -295,24 +351,23 @@ public class SpecificShade extends AppCompatActivity implements NavigationView.O
         if (id == R.id.nav_designerPalettes) {
             Intent L = new Intent(this, DesignerPalettedActivity.class);
             startActivity(L);
+        }
+        if (id == R.id.nav_fav) {
+            Intent L = new Intent(this, FavouriteActivity.class);
+            startActivity(L);
+        }
+        if (id == R.id.nav_myproject) {
+            Intent intent = new Intent(this, MyProject.class);
+            startActivity(intent);
+        }
+        if (id == R.id.nav_setting) {
+            Intent L = new Intent(this, SettingsActivity.class);
+            startActivity(L);
         } else {
             dl.closeDrawer(GravityCompat.START);
             return true;
         }
 
-//        if (id == R.id.nav_home) {
-//            // Handle the camera action
-//        } else if (id == R.id.nav_search) {
-//            Intent L = new Intent(this, SearchActivity.class);
-//            startActivity(L);
-//
-//        } else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_rate) {
-//
-//        } else if (id == R.id.nav_exit) {
-//
-//        }
 
 //        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 

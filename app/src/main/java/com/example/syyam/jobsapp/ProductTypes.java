@@ -50,7 +50,7 @@ public class ProductTypes extends AppCompatActivity
 
     private int projectId, catergoryId, surfaceId, finishId;
 
-    public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
+    public static class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
         private int spanCount;
         private int spacing;
@@ -90,7 +90,6 @@ public class ProductTypes extends AppCompatActivity
     public void onItemClicked(int position, Integer id, String sender) {
         // call back here
 
-
         SenderName = sender;
         senderId = id;
         //make a condition to use one of them by sending a parameter
@@ -98,29 +97,35 @@ public class ProductTypes extends AppCompatActivity
             projectId = senderId; //param
             getSecondData(projectId); // CategorySpecific
 
-            secondBox.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
-            secondBox.setImageResource(R.mipmap.pf_interior_selected);
+
+            firstBox.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
+            firstBox.setImageResource(R.mipmap.pf_finish_selected);
         } else if (SenderName.equals("second")) {
             catergoryId = senderId; //param
             getThirdData(catergoryId); // SurfaceSpecific
 
-            thirdBox.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
-            thirdBox.setImageResource(R.mipmap.pf_wall_selected);
+            secondBox.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
+            secondBox.setImageResource(R.mipmap.pf_interior_selected);
+
         } else if (SenderName.equals("third")) {
             surfaceId = senderId;  //param
             getFourthData(surfaceId); // FininshSpecific
 
-            fourthBox.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
-            fourthBox.setImageResource(R.mipmap.pf_matt_selected);
+            thirdBox.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
+            thirdBox.setImageResource(R.mipmap.pf_wall_selected);
+
         } else if (SenderName.equals("fourth")) {
 
             finishId = senderId; //param
 
+            fourthBox.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
+            fourthBox.setImageResource(R.mipmap.pf_matt_selected);
             Intent pf = new Intent(ProductTypes.this, ProductFilter.class);
             pf.putExtra("projectId", projectId + "");
             pf.putExtra("catergoryId", catergoryId + "");
             pf.putExtra("surfaceId", surfaceId + "");
             pf.putExtra("finishId", finishId + "");
+            finish();
             startActivity(pf);
 
         }

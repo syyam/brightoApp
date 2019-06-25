@@ -1,5 +1,6 @@
 package com.example.syyam.jobsapp;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.syyam.jobsapp.Fragments.StoreFragment;
 import com.example.syyam.jobsapp.Models.CountryDatum;
 
 import java.util.List;
@@ -18,12 +18,12 @@ public class StoreCityAdapter extends RecyclerView.Adapter<StoreCityAdapter.CF_V
     private AdapterCallback mAdapterCallback;
 
 
-    private StoreFragment context;
+    private Context context;
     private List<CountryDatum> shades;
     AdapterCallback callback;
 
 
-    public StoreCityAdapter(StoreFragment context, List<CountryDatum> shades, AdapterCallback callback) {
+    public StoreCityAdapter(Context context, List<CountryDatum> shades, AdapterCallback callback) {
         this.context = context;
         this.shades = shades;
         this.callback = callback;

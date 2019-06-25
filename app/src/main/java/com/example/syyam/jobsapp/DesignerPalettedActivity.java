@@ -134,7 +134,7 @@ public class DesignerPalettedActivity extends AppCompatActivity implements Desig
                         Toast.makeText(DesignerPalettedActivity.this, list.getMessage(), Toast.LENGTH_LONG).show();
 
                         if (list.getMessage() == null) {
-                            Toast.makeText(DesignerPalettedActivity.this, list.getErrors(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(DesignerPalettedActivity.this, list.getErrors() + " You need to sign in.", Toast.LENGTH_LONG).show();
                         }
                     } else {
                         Toast.makeText(DesignerPalettedActivity.this, "Invalid operation", Toast.LENGTH_LONG).show();

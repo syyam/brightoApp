@@ -81,19 +81,17 @@ public class ProductTypesFourthAdapter extends RecyclerView.Adapter<ProductTypes
         holder.radioButton.setChecked(lastSelectedPosition == position);
 
 
-//        holder.mLinearLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//
-//
-//                if (callback != null) {
-//                    callback.onItemClicked(position, colors.getId(), "second");
-//                }
-//
-//
-//            }
-//        });
+        holder.mLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (callback != null) {
+                    callback.onItemClicked(position, colors.getId(), "fourth");
+                }
+
+            }
+        });
+
 
         holder.radioButton.setOnClickListener(new View.OnClickListener() {
             @Override

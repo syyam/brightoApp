@@ -24,13 +24,14 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CF_ViewH
 
     private Context context;
     private List<CountryDatum> shades;
-    private int lastSelectedPosition = 0;
+    private int lastSelectedPosition = 0; // to start selectless make it -1
 
 
     public CountryAdapter(Context context, List<CountryDatum> shades) {
         this.context = context;
         this.shades = shades;
     }
+
 
     @NonNull
     @Override
@@ -52,13 +53,12 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CF_ViewH
         String name = countries.getName().toString();
 
 
-        final int[] send_id = {this.shades.get(0).getId()};
+        final int[] send_id = {this.shades.get(lastSelectedPosition).getId()};
 
 
         holder.mTextView.setText(name);
 
-        holder.editor.putInt("countryId", country.get(lastSelectedPosition).getId()); //default 1st id will be sent if n field is selected
-        holder.editor.apply();
+
 
 
         //TODO: radio button should be fixed
@@ -71,7 +71,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CF_ViewH
                 notifyDataSetChanged();
 
 
-                holder.editor.putInt("countryId", country.get(lastSelectedPosition).getId());
+                holder.editor.putInt("countryId", country.get(lastSelectedPosition).getId()); // add +1 if start from -1
                 holder.editor.apply();
 
 
@@ -114,7 +114,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CF_ViewH
             super(itemView);
             mTextView = itemView.findViewById(R.id.countryName);
             radioButton = itemView.findViewById(R.id.radio_btn);
-            radioGroup = itemView.findViewById(R.id.radioGroup1);
+            //radioGroup = itemView.findViewById(R.id.radioGroup1);
             LL = itemView.findViewById(R.id.LL);
 
 

@@ -65,6 +65,7 @@ public class ProductDetailsAdapter extends RecyclerView.Adapter<ProductDetailsAd
             public void onClick(View view) {
                 Intent s = new Intent(view.getContext(), SpecificShade.class);
 
+                s.putExtra("sid", colors.getId().toString());
                 s.putExtra("R", colors.getColor().getR().toString());
                 s.putExtra("G", colors.getColor().getG().toString());
                 s.putExtra("B", colors.getColor().getB().toString());

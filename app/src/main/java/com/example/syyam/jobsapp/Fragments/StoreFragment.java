@@ -45,6 +45,10 @@ public class StoreFragment extends Fragment implements StoreAdapter.AdapterCallb
 
     private String SenderName = "zero", Name = "", prevText = "   ";
     private int SenderId = 0;
+    private String countryName;
+    private int check = 0;
+
+    private String[] strings = new String[2];
 
     public StoreFragment() {
         // Required empty public constructor
@@ -58,9 +62,29 @@ public class StoreFragment extends Fragment implements StoreAdapter.AdapterCallb
         prevText = topText.getText().toString();
         Name = name;
 
-        if (!prevText.contains(name)) {
-            prevText = prevText + "  >  " + name;
-            topText.setText(prevText);
+
+//        if (!prevText.contains(name)) {
+//            prevText = prevText + "  >  " + name;
+//            topText.setText(prevText);
+//        }
+
+        for (int i = 0; i <= strings.length; i++) {
+
+            if (!prevText.contains(name)) {
+                if (check == 0) {
+                    countryName = strings[i];
+                }
+                strings[i] = "  >  " + Name;  //jugaar at its finest :-)
+                if (check == 0) {
+                    countryName = strings[i];
+                    check = 1;
+                }
+
+                prevText = prevText + strings[i];
+                topText.setText(prevText);
+            }
+
+
         }
 
 
@@ -71,6 +95,40 @@ public class StoreFragment extends Fragment implements StoreAdapter.AdapterCallb
             getCityDetailData(id); // sending city_id
 
 
+    }
+
+    public boolean onBackPressed() {
+        //Toast.makeText(getContext(), prevText, Toast.LENGTH_LONG).show();
+
+//            topText.setText("Select  >  "+ strings[strings.length-1]);
+
+
+//        for (int i = strings.length - 1; i > 0; i--) {
+//            strings[i] = "";
+//
+//
+//        }
+//        prevText = "Select > ";
+//        for (int i = 0; i <= strings.length; i++) {
+//
+//            topText.setText(prevText);
+//        }
+
+        if (SenderName.equals("first") && SenderName != null) {
+            getData(); // FininshSpecific
+            SenderName = "zero";
+
+            topText.setText("Select  ");
+        }
+
+        if (SenderName.equals("second") && SenderName != null) {
+            getCityData(SenderId); // FininshSpecific
+            SenderName = "first";
+
+            topText.setText("Select " + countryName);
+        }
+        // return true if you want to consume back-pres sed event
+        return true;
     }
 
     @Override
@@ -108,7 +166,7 @@ public class StoreFragment extends Fragment implements StoreAdapter.AdapterCallb
             public void onResponse(Call<Countries> call, Response<Countries> response) {
 
                 Countries list = response.body();
-                recyclerView.setAdapter(new StoreAdapter(StoreFragment.this, list.getData(), (StoreAdapter.AdapterCallback) StoreFragment.this));
+                recyclerView.setAdapter(new StoreAdapter(getContext(), list.getData(), (StoreAdapter.AdapterCallback) StoreFragment.this));
 
                 //Toast.makeText(getContext(), "success",Toast.LENGTH_LONG).show();
             }
@@ -143,7 +201,7 @@ public class StoreFragment extends Fragment implements StoreAdapter.AdapterCallb
                 Extras.hideLoader();
                 DealerCity list = response.body();
                 recyclerView.invalidate();
-                recyclerView.setAdapter(new StoreDealerCityAdapter(StoreFragment.this, list.getData()));
+                recyclerView.setAdapter(new StoreDealerCityAdapter(getContext(), list.getData(), null));
 
             }
 
@@ -179,7 +237,7 @@ public class StoreFragment extends Fragment implements StoreAdapter.AdapterCallb
                 Extras.hideLoader();
                 Countries list = response.body();
                 recyclerView.invalidate();
-                recyclerView.setAdapter(new StoreCityAdapter(StoreFragment.this, list.getData(), (StoreCityAdapter.AdapterCallback) StoreFragment.this));
+                recyclerView.setAdapter(new StoreCityAdapter(getContext(), list.getData(), (StoreCityAdapter.AdapterCallback) StoreFragment.this));
 
             }
 
@@ -191,30 +249,6 @@ public class StoreFragment extends Fragment implements StoreAdapter.AdapterCallb
         });
     }
 
-    public boolean onBackPressed() {
-
-        // -- your code --
-
-        //Toast.makeText(getContext(), prevText, Toast.LENGTH_LONG).show();
-
-//        for (int i = prevText.length(); i >= 0; i--) {
-//            if(prevText.charAt(i). ){
-//
-//            }
-//        }
-
-        if (SenderName.equals("first") && SenderName != null) {
-            getData(); // FininshSpecific
-            SenderName = "zero";
-        }
-
-        if (SenderName.equals("second") && SenderName != null) {
-            getCityData(SenderId); // FininshSpecific
-            SenderName = "first";
-        }
-        // return true if you want to consume back-pres sed event
-        return true;
-    }
 
     public int getBackPriority() {
         // use apropriate priority here

@@ -40,6 +40,10 @@
             android:title="Color Advisory" />
 
         <item
+            android:id="@+id/nav_myproject"
+            android:icon="@mipmap/lm_help"
+            android:title="My Project" />
+        <item
             android:id="@+id/nav_setting"
             android:icon="@mipmap/lm_setting"
             android:title="Settings" />

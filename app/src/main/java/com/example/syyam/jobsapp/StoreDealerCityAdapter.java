@@ -1,6 +1,7 @@
 package com.example.syyam.jobsapp;
 
 import android.content.Intent;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,21 +10,21 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.syyam.jobsapp.Fragments.StoreFragment;
 import com.example.syyam.jobsapp.Models.DealerCityDatum;
 
 import java.util.List;
 
 public class StoreDealerCityAdapter extends RecyclerView.Adapter<StoreDealerCityAdapter.CF_ViewHolder> {
 
-    private StoreFragment context;
+    private Context context;
     private List<DealerCityDatum> shades;
+    StoreAdapter.AdapterCallback callback;
 
 
-    public StoreDealerCityAdapter(StoreFragment context, List<DealerCityDatum> shades) {
+    public StoreDealerCityAdapter(Context context, List<DealerCityDatum> shades, StoreAdapter.AdapterCallback callback) {
         this.context = context;
         this.shades = shades;
-
+        this.callback = callback;
     }
 
     @NonNull
@@ -41,7 +42,7 @@ public class StoreDealerCityAdapter extends RecyclerView.Adapter<StoreDealerCity
 
         final DealerCityDatum dealercities = this.shades.get(position);
 
-        String name = dealercities.getName().toString();
+        String name = dealercities.getName();
 
         holder.c_name.setText(name);
         holder.address.setText(dealercities.getAddress().toString());
@@ -56,6 +57,22 @@ public class StoreDealerCityAdapter extends RecyclerView.Adapter<StoreDealerCity
                 context.startActivity(intent);
             }
         });
+        if(callback == null) {
+//        holder.countrycityLL.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+        }
+        else{
+            holder.countrycityLL.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callback.onItemClicked(position, dealercities.getId(), dealercities.getName(), "dealer");
+                }
+            });
+        }
 
     }
 
@@ -72,6 +89,7 @@ public class StoreDealerCityAdapter extends RecyclerView.Adapter<StoreDealerCity
 
         public CF_ViewHolder(View itemView) {
             super(itemView);
+            countrycityLL = itemView.findViewById(R.id.countrycityLL);
             c_name = itemView.findViewById(R.id.c_name);
             address = itemView.findViewById(R.id.address);
             countrycityLL = itemView.findViewById(R.id.countrycityLL);

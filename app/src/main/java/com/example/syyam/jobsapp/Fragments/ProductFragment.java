@@ -115,7 +115,7 @@ public class ProductFragment extends Fragment {
 
 
         SharedPreferences prefs = mContext.getSharedPreferences("Country", mContext.MODE_PRIVATE);
-        final int cid = prefs.getInt("countryId", 0); //0 is the default value.
+        final int cid = prefs.getInt("countryId", -1); //0 is the default value.
 
 
         CountryParam countryParam = new CountryParam();
@@ -129,7 +129,7 @@ public class ProductFragment extends Fragment {
 
                 if (response != null) {
                     Products list = response.body();
-                    recyclerView.setAdapter(new ProductAdapter(ProductFragment.this, list.getData(), cid));
+                    recyclerView.setAdapter(new ProductAdapter(getContext(), list.getData(), cid, true, null));
 
                     //Toast.makeText(getContext(), "success",Toast.LENGTH_LONG).show();
                 }

@@ -80,6 +80,10 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
             Intent L = new Intent(this, DesignerPalettedActivity.class);
             startActivity(L);
         }
+        if (id == R.id.nav_fav) {
+            Intent L = new Intent(this, FavouriteActivity.class);
+            startActivity(L);
+        }
         else {
             drawer.closeDrawer(GravityCompat.START);
             return true;
