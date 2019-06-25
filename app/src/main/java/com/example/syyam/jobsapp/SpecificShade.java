@@ -30,6 +30,7 @@ import com.example.syyam.jobsapp.Models.Like;
 import com.example.syyam.jobsapp.Models.params.ProductParam;
 import com.example.syyam.jobsapp.Models.params.ShadeParam;
 import com.example.syyam.jobsapp.Utils.Config;
+import com.example.syyam.jobsapp.Utils.Extras;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -159,7 +160,7 @@ public class SpecificShade extends AppCompatActivity implements NavigationView.O
     }
 
     public void loveCall(String sender) {
-
+        Extras.showLoader(SpecificShade.this);
 
         Retrofit build = new Retrofit
                 .Builder()
@@ -186,7 +187,7 @@ public class SpecificShade extends AppCompatActivity implements NavigationView.O
         productsCall.enqueue(new Callback<Like>() {
             @Override
             public void onResponse(Call<Like> call, Response<Like> response) {
-
+                Extras.hideLoader();
                 if (response != null) {
                     Like list = response.body();
 
@@ -205,6 +206,7 @@ public class SpecificShade extends AppCompatActivity implements NavigationView.O
 
             @Override
             public void onFailure(Call<Like> call, Throwable t) {
+                Extras.hideLoader();
                 Toast.makeText(SpecificShade.this, "Failure: " + t, Toast.LENGTH_LONG).show();
             }
         });
@@ -224,7 +226,7 @@ public class SpecificShade extends AppCompatActivity implements NavigationView.O
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // as you specify a parent activity in AndroidManifest.network_security_config.
         int id = item.getItemId();
 
         if (t.onOptionsItemSelected(item)) {

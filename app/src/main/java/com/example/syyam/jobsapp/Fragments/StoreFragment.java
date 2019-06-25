@@ -22,6 +22,7 @@ import com.example.syyam.jobsapp.StoreAdapter;
 import com.example.syyam.jobsapp.StoreCityAdapter;
 import com.example.syyam.jobsapp.StoreDealerCityAdapter;
 import com.example.syyam.jobsapp.Utils.Config;
+import com.example.syyam.jobsapp.Utils.Extras;
 
 import net.skoumal.fragmentback.BackFragment;
 
@@ -120,6 +121,7 @@ public class StoreFragment extends Fragment implements StoreAdapter.AdapterCallb
     }
 
     private void getCityDetailData(Integer id) {
+        Extras.showLoader(getContext());
         Retrofit build = new Retrofit
                 .Builder()
                 .baseUrl(Config.BASE_URL)
@@ -138,7 +140,7 @@ public class StoreFragment extends Fragment implements StoreAdapter.AdapterCallb
         citiesCall.enqueue(new Callback<DealerCity>() {
             @Override
             public void onResponse(Call<DealerCity> call, Response<DealerCity> response) {
-
+                Extras.hideLoader();
                 DealerCity list = response.body();
                 recyclerView.invalidate();
                 recyclerView.setAdapter(new StoreDealerCityAdapter(StoreFragment.this, list.getData()));
@@ -147,6 +149,7 @@ public class StoreFragment extends Fragment implements StoreAdapter.AdapterCallb
 
             @Override
             public void onFailure(Call<DealerCity> call, Throwable t) {
+                Extras.hideLoader();
                 //Toast.makeText(CountryActivity.this, "Failure", Toast.LENGTH_LONG).show();
             }
         });
@@ -154,6 +157,7 @@ public class StoreFragment extends Fragment implements StoreAdapter.AdapterCallb
 
 
     private void getCityData(Integer id) {
+        Extras.showLoader(getContext());
         Retrofit build = new Retrofit
                 .Builder()
                 .baseUrl(Config.BASE_URL)
@@ -172,7 +176,7 @@ public class StoreFragment extends Fragment implements StoreAdapter.AdapterCallb
         citiesCall.enqueue(new Callback<Countries>() {
             @Override
             public void onResponse(Call<Countries> call, Response<Countries> response) {
-
+                Extras.hideLoader();
                 Countries list = response.body();
                 recyclerView.invalidate();
                 recyclerView.setAdapter(new StoreCityAdapter(StoreFragment.this, list.getData(), (StoreCityAdapter.AdapterCallback) StoreFragment.this));
@@ -181,6 +185,7 @@ public class StoreFragment extends Fragment implements StoreAdapter.AdapterCallb
 
             @Override
             public void onFailure(Call<Countries> call, Throwable t) {
+                Extras.hideLoader();
                 //Toast.makeText(CountryActivity.this, "Failure", Toast.LENGTH_LONG).show();
             }
         });

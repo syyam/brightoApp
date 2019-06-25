@@ -2,41 +2,33 @@ package com.example.syyam.jobsapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Rect;
-import android.graphics.drawable.ColorDrawable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.syyam.jobsapp.Fragments.ProductFragment;
 import com.example.syyam.jobsapp.Models.CategorySpecific;
 import com.example.syyam.jobsapp.Models.FinishSpecific;
 import com.example.syyam.jobsapp.Models.ProductType;
-import com.example.syyam.jobsapp.Models.Products;
-import com.example.syyam.jobsapp.Models.ShadesProduct.Product;
 import com.example.syyam.jobsapp.Models.SurfaceSpecific;
 import com.example.syyam.jobsapp.Models.params.CategoryParam;
-import com.example.syyam.jobsapp.Models.params.CountryParam;
 import com.example.syyam.jobsapp.Models.params.ProjectTypeParam;
 import com.example.syyam.jobsapp.Models.params.SurfaceParam;
 import com.example.syyam.jobsapp.Utils.Config;
 import com.example.syyam.jobsapp.Utils.Extras;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ProductTypes extends AppCompatActivity
+public class FiltersActivity extends AppCompatActivity
         implements ProductTypesAdapter.AdapterCallback,
         ProductTypesSecondAdapter.AdapterCallback,
         ProductTypesThirdAdapter.AdapterCallback,
@@ -44,6 +36,8 @@ public class ProductTypes extends AppCompatActivity
 
     RecyclerView recyclerView;
     Context mContext;
+    private Toolbar toolbar;
+    TextView sbtbtn;
     private ImageView firstBox, secondBox, thirdBox, fourthBox;
     private String SenderName = "";
     private int senderId;
@@ -98,30 +92,29 @@ public class ProductTypes extends AppCompatActivity
             projectId = senderId; //param
             getSecondData(projectId); // CategorySpecific
 
-            secondBox.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
-            secondBox.setImageResource(R.mipmap.pf_interior_selected);
+//            secondBox.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
+//            secondBox.setImageResource(R.mipmap.pf_interior_selected);
         } else if (SenderName.equals("second")) {
             catergoryId = senderId; //param
             getThirdData(catergoryId); // SurfaceSpecific
 
-            thirdBox.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
-            thirdBox.setImageResource(R.mipmap.pf_wall_selected);
+//            thirdBox.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
+//            thirdBox.setImageResource(R.mipmap.pf_wall_selected);
         } else if (SenderName.equals("third")) {
             surfaceId = senderId;  //param
             getFourthData(surfaceId); // FininshSpecific
 
-            fourthBox.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
-            fourthBox.setImageResource(R.mipmap.pf_matt_selected);
+//            fourthBox.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
+//            fourthBox.setImageResource(R.mipmap.pf_matt_selected);
         } else if (SenderName.equals("fourth")) {
-
+            sbtbtn.setVisibility(View.VISIBLE);
             finishId = senderId; //param
-
-            Intent pf = new Intent(ProductTypes.this, ProductFilter.class);
+            Intent pf = new Intent(FiltersActivity.this, ProductFilter.class);
             pf.putExtra("projectId", projectId + "");
             pf.putExtra("catergoryId", catergoryId + "");
             pf.putExtra("surfaceId", surfaceId + "");
             pf.putExtra("finishId", finishId + "");
-            startActivity(pf);
+//            startActivity(pf);
 
         }
 
@@ -165,19 +158,7 @@ public class ProductTypes extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_types);
-
-
-//        getSupportActionBar().setTitle("Product Finder");
-//        getSupportActionBar().setBackgroundDrawable(new ProductTypes(getResources().getColor(R.color.White)));
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeButtonEnabled(false);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
-        //actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.White)));
-        actionBar.setTitle("Product Finder");
-        actionBar.show();
+        setContentView(R.layout.filteractivity);
 
 
         int spanCount = 2; // 3 columns
@@ -188,12 +169,40 @@ public class ProductTypes extends AppCompatActivity
         secondBox = (ImageView) findViewById(R.id.secondBox);
         thirdBox = (ImageView) findViewById(R.id.thirdBox);
         fourthBox = (ImageView) findViewById(R.id.fourthBox);
+        toolbar = findViewById(R.id.toolbar);
+        if (toolbar != null) {
+
+            toolbar.setTitle("Product Finder");
+            setSupportActionBar(toolbar);
+            toolbar.setTitleTextColor(getResources().getColor(R.color.White));
+            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            toolbar.setNavigationIcon(R.mipmap.top_back);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        }
+        sbtbtn = findViewById(R.id.submitBtn);
+        sbtbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent pf = new Intent(FiltersActivity.this, ProductFilter.class);
+                pf.putExtra("projectId", projectId + "");
+                pf.putExtra("catergoryId", catergoryId + "");
+                pf.putExtra("surfaceId", surfaceId + "");
+                pf.putExtra("finishId", finishId + "");
+                startActivity(pf);
+            }
+        });
 
 
         recyclerView = (RecyclerView) findViewById(R.id.productTypesList);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        recyclerView.addItemDecoration(new ProductTypes.GridSpacingItemDecoration(spanCount, spacing, includeEdge));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        recyclerView.addItemDecoration(new FiltersActivity.GridSpacingItemDecoration(spanCount, spacing, includeEdge));
 
 
         getData();
@@ -205,7 +214,7 @@ public class ProductTypes extends AppCompatActivity
      * Project Type
      * */
     private void getData() {
-        Extras.showLoader(ProductTypes.this);
+        Extras.showLoader(FiltersActivity.this);
         Retrofit build = new Retrofit
                 .Builder()
                 .baseUrl(Config.BASE_URL)
@@ -226,10 +235,9 @@ public class ProductTypes extends AppCompatActivity
             public void onResponse(Call<ProductType> call, Response<ProductType> response) {
                 Extras.hideLoader();
                 if (response != null) {
-
                     ProductType list = response.body();
-                    recyclerView.setAdapter(new ProductTypesAdapter(ProductTypes.this, list.getData(), (ProductTypesAdapter.AdapterCallback) ProductTypes.this,0));
-
+                    recyclerView.setAdapter(new ProductTypesAdapter(FiltersActivity.this, list.getData(), (ProductTypesAdapter.AdapterCallback) FiltersActivity.this,1));
+                    Extras.hideLoader();
                     //Toast.makeText(getContext(), "success",Toast.LENGTH_LONG).show();
                 }
             }
@@ -237,7 +245,7 @@ public class ProductTypes extends AppCompatActivity
             @Override
             public void onFailure(Call<ProductType> call, Throwable t) {
                 Extras.hideLoader();
-                Toast.makeText(ProductTypes.this, "Failure", Toast.LENGTH_LONG).show();
+                Toast.makeText(FiltersActivity.this, "Failure", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -248,7 +256,7 @@ public class ProductTypes extends AppCompatActivity
      * @Params=projectTypeId
      * */
     private void getSecondData(int id) {
-        Extras.showLoader(ProductTypes.this);
+        Extras.showLoader(FiltersActivity.this);
         Retrofit build = new Retrofit
                 .Builder()
                 .baseUrl(Config.BASE_URL)
@@ -269,11 +277,10 @@ public class ProductTypes extends AppCompatActivity
         productsCall.enqueue(new Callback<CategorySpecific>() {
             @Override
             public void onResponse(Call<CategorySpecific> call, Response<CategorySpecific> response) {
-
                 Extras.hideLoader();
                 if (response != null) {
                     CategorySpecific list = response.body();
-                    recyclerView.setAdapter(new ProductTypesSecondAdapter(ProductTypes.this, list.getData(), (ProductTypesSecondAdapter.AdapterCallback) ProductTypes.this,0));
+                    recyclerView.setAdapter(new ProductTypesSecondAdapter(FiltersActivity.this, list.getData(), (ProductTypesSecondAdapter.AdapterCallback) FiltersActivity.this,1));
 
                     //Toast.makeText(getContext(), "success",Toast.LENGTH_LONG).show();
                 }
@@ -282,7 +289,7 @@ public class ProductTypes extends AppCompatActivity
             @Override
             public void onFailure(Call<CategorySpecific> call, Throwable t) {
                 Extras.hideLoader();
-                Toast.makeText(ProductTypes.this, "Failure", Toast.LENGTH_LONG).show();
+                Toast.makeText(FiltersActivity.this, "Failure", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -293,7 +300,7 @@ public class ProductTypes extends AppCompatActivity
      * @Params=categoryId
      * */
     private void getThirdData(int id) {
-        Extras.showLoader(ProductTypes.this);
+        Extras.showLoader(FiltersActivity.this);
         Retrofit build = new Retrofit
                 .Builder()
                 .baseUrl(Config.BASE_URL)
@@ -310,11 +317,10 @@ public class ProductTypes extends AppCompatActivity
         productsCall.enqueue(new Callback<SurfaceSpecific>() {
             @Override
             public void onResponse(Call<SurfaceSpecific> call, Response<SurfaceSpecific> response) {
-
                 Extras.hideLoader();
                 if (response != null) {
                     SurfaceSpecific list = response.body();
-                    recyclerView.setAdapter(new ProductTypesThirdAdapter(ProductTypes.this, list.getData(), (ProductTypesThirdAdapter.AdapterCallback) ProductTypes.this,0));
+                    recyclerView.setAdapter(new ProductTypesThirdAdapter(FiltersActivity.this, list.getData(), (ProductTypesThirdAdapter.AdapterCallback) FiltersActivity.this,1));
 
                     //Toast.makeText(getContext(), "success",Toast.LENGTH_LONG).show();
                 }
@@ -323,7 +329,7 @@ public class ProductTypes extends AppCompatActivity
             @Override
             public void onFailure(Call<SurfaceSpecific> call, Throwable t) {
                 Extras.hideLoader();
-                Toast.makeText(ProductTypes.this, "Failure", Toast.LENGTH_LONG).show();
+                Toast.makeText(FiltersActivity.this, "Failure", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -334,7 +340,7 @@ public class ProductTypes extends AppCompatActivity
      * @Params=surfaceId
      * */
     private void getFourthData(int id) {
-        Extras.showLoader(ProductTypes.this);
+        Extras.showLoader(FiltersActivity.this);
         Retrofit build = new Retrofit
                 .Builder()
                 .baseUrl(Config.BASE_URL)
@@ -354,7 +360,7 @@ public class ProductTypes extends AppCompatActivity
                 Extras.hideLoader();
                 if (response != null) {
                     FinishSpecific list = response.body();
-                    recyclerView.setAdapter(new ProductTypesFourthAdapter(ProductTypes.this, list.getData(), (ProductTypesFourthAdapter.AdapterCallback) ProductTypes.this,0));
+                    recyclerView.setAdapter(new ProductTypesFourthAdapter(FiltersActivity.this, list.getData(), (ProductTypesFourthAdapter.AdapterCallback) FiltersActivity.this,1));
 
                     //Toast.makeText(getContext(), "success",Toast.LENGTH_LONG).show();
                 }
@@ -363,7 +369,7 @@ public class ProductTypes extends AppCompatActivity
             @Override
             public void onFailure(Call<FinishSpecific> call, Throwable t) {
                 Extras.hideLoader();
-                Toast.makeText(ProductTypes.this, "Failure", Toast.LENGTH_LONG).show();
+                Toast.makeText(FiltersActivity.this, "Failure", Toast.LENGTH_LONG).show();
             }
         });
     }

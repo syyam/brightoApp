@@ -16,6 +16,7 @@ import com.example.syyam.jobsapp.Models.Products;
 import com.example.syyam.jobsapp.Models.ShadesProduct.Product;
 import com.example.syyam.jobsapp.Models.params.CountryParam;
 import com.example.syyam.jobsapp.Utils.Config;
+import com.example.syyam.jobsapp.Utils.Extras;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -113,6 +114,7 @@ public class ProductFilter extends AppCompatActivity {
     }
 
     private void getData() {
+        Extras.showLoader(ProductFilter.this);
         Retrofit build = new Retrofit
                 .Builder()
                 .baseUrl(Config.BASE_URL)
@@ -137,7 +139,7 @@ public class ProductFilter extends AppCompatActivity {
         productsCall.enqueue(new Callback<Products>() {
             @Override
             public void onResponse(Call<Products> call, Response<Products> response) {
-
+Extras.hideLoader();
                 if (response != null) {
                     Products list = response.body();
                     recyclerView.setAdapter(new ProductFilterAdapter(ProductFilter.this, list.getData()));
@@ -148,6 +150,7 @@ public class ProductFilter extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Products> call, Throwable t) {
+                Extras.hideLoader();
                 Toast.makeText(ProductFilter.this, "Failure", Toast.LENGTH_LONG).show();
             }
         });

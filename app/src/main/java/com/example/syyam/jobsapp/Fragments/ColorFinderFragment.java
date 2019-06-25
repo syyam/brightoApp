@@ -19,6 +19,7 @@ import com.example.syyam.jobsapp.Models.ColorFinder;
 import com.example.syyam.jobsapp.Models.Datum;
 import com.example.syyam.jobsapp.R;
 import com.example.syyam.jobsapp.Utils.Config;
+import com.example.syyam.jobsapp.Utils.Extras;
 
 import java.util.List;
 
@@ -63,6 +64,7 @@ public class ColorFinderFragment extends Fragment {
     }
 
     private void getData() {
+        Extras.showLoader(getContext());
         Retrofit build = new Retrofit
                 .Builder()
                 .baseUrl(Config.BASE_URL)
@@ -81,7 +83,7 @@ public class ColorFinderFragment extends Fragment {
         colorFinderCall.enqueue(new Callback<ColorFinder>() {
             @Override
             public void onResponse(Call<ColorFinder> call, Response<ColorFinder> response) {
-
+Extras.hideLoader();
                 if (response != null) {
                     ColorFinder list = response.body();
                     recyclerView.setAdapter(new ColorFinderAdapter(ColorFinderFragment.this, list.getData(), cid));
@@ -92,6 +94,7 @@ public class ColorFinderFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ColorFinder> call, Throwable t) {
+                Extras.hideLoader();
                 Toast.makeText(getContext(), "Failure", Toast.LENGTH_LONG).show();
             }
         });

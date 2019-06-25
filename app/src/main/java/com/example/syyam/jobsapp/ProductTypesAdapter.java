@@ -1,9 +1,6 @@
 package com.example.syyam.jobsapp;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,35 +10,34 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.syyam.jobsapp.Fragments.ColorFinderFragment;
-import com.example.syyam.jobsapp.Fragments.ProductFragment;
-import com.example.syyam.jobsapp.Models.Datum;
 import com.example.syyam.jobsapp.Models.ProductTypeDatum;
-import com.example.syyam.jobsapp.Models.ProductsDatum;
 import com.example.syyam.jobsapp.Utils.Config;
 
 import java.util.List;
 
 public class ProductTypesAdapter extends RecyclerView.Adapter<ProductTypesAdapter.CF_ViewHolder> {
-
+    /*
+    0=with image
+    1=without image
+    */
     private AdapterCallback mAdapterCallback;
-
-    private ProductTypes context;
+    private Context context;
     private List<ProductTypeDatum> colors;
     private int lastSelectedPosition = -1;
     AdapterCallback callback;
+    private int type;
 
 
     public static interface AdapterCallback {
         void onItemClicked(int position, Integer id, String Sender);
     }
 
-    public ProductTypesAdapter(ProductTypes context, List<ProductTypeDatum> colors, AdapterCallback callback) {
+    public ProductTypesAdapter(Context context, List<ProductTypeDatum> colors, AdapterCallback callback, int type) {
         this.context = context;
         this.colors = colors;
+        this.type = type;
         this.callback = callback;
 
     }
@@ -51,7 +47,12 @@ public class ProductTypesAdapter extends RecyclerView.Adapter<ProductTypesAdapte
     public CF_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.item_product_types, parent, false);
+        View view;
+        if (type == 0)
+            view = inflater.inflate(R.layout.item_product_types, parent, false);
+        else
+            view = inflater.inflate(R.layout.itemfilter, parent, false);
+
         return new CF_ViewHolder(view);
     }
 
@@ -71,22 +72,25 @@ public class ProductTypesAdapter extends RecyclerView.Adapter<ProductTypesAdapte
         String imgurl = Config.IMAGE_URL + colors.getImage();
 
         holder.topTextView.setText(topText);
-        Glide.with(context).load(imgurl).into(holder.imageView);
+
 
         holder.radioButton.setChecked(lastSelectedPosition == position);
+        if (type == 0) {
+            holder.mLinearLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if (callback != null) {
+                        callback.onItemClicked(position, colors.getId(), "first");
+                    }
 
 
-//        holder.mLinearLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                if (callback != null) {
-//                    callback.onItemClicked(position, colors.getId(), "first");
-//                }
-//
-//
-//            }
-//        });
+                }
+            });
+
+            Glide.with(context).load(imgurl).into(holder.imageView);
+        }
+
 
         holder.radioButton.setOnClickListener(new View.OnClickListener() {
             @Override

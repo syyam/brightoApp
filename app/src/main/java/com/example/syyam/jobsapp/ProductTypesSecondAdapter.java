@@ -30,10 +30,11 @@ public class ProductTypesSecondAdapter extends RecyclerView.Adapter<ProductTypes
 
     private AdapterCallback mAdapterCallback;
 
-    private ProductTypes context;
+    private Context context;
     private List<CategorySpecificDatum> colors;
     private int lastSelectedPosition = -1;
     AdapterCallback callback;
+    int type;
 
 
 
@@ -42,9 +43,10 @@ public class ProductTypesSecondAdapter extends RecyclerView.Adapter<ProductTypes
         void onItemClicked(int position, Integer id, String Sender);
     }
 
-    public ProductTypesSecondAdapter(ProductTypes context, List<CategorySpecificDatum> colors, AdapterCallback callback) {
+    public ProductTypesSecondAdapter(Context context, List<CategorySpecificDatum> colors, AdapterCallback callback,int type) {
         this.context = context;
         this.colors = colors;
+        this.type=type;
         this.callback = callback;
 
     }
@@ -54,7 +56,11 @@ public class ProductTypesSecondAdapter extends RecyclerView.Adapter<ProductTypes
     public CF_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.item_product_types, parent, false);
+        View view;
+        if (type == 0)
+            view = inflater.inflate(R.layout.item_product_types, parent, false);
+        else
+            view = inflater.inflate(R.layout.itemfilter, parent, false);
         return new CF_ViewHolder(view);
     }
 
@@ -74,6 +80,7 @@ public class ProductTypesSecondAdapter extends RecyclerView.Adapter<ProductTypes
         String imgurl= Config.IMAGE_URL + colors.getImage();
 
         holder.topTextView.setText(topText);
+        if(type==0)
         Glide.with(context).load(imgurl).into(holder.imageView);
 
         holder.radioButton.setChecked(lastSelectedPosition == position);

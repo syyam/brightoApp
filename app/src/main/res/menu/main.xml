@@ -2,8 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_search"
+        android:title=""
+        android:id="@+id/filter"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_action_action_search"
+        android:icon="@mipmap/top_filter"
         app:showAsAction="always" />
+    <item
+        android:title=""
+    android:id="@+id/action_search"
+    android:orderInCategory="100"
+    android:icon="@drawable/ic_action_action_search"
+    app:showAsAction="always" />
+
 </menu>

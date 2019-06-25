@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "212821278386",
+    "firebase_url": "https://propertyapp-c0404.firebaseio.com",
+    "project_id": "propertyapp-c0404",
+    "storage_bucket": "propertyapp-c0404.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:212821278386:android:08c2b3e98d92699a",
+        "android_client_info": {
+          "package_name": "com.example.syyam.jobsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "212821278386-ck6cm31oenmsqoudkotrd45q07v5dp8h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.syyam.jobsapp",
+            "certificate_hash": "ff123d5e412e9aafea966a4936fc63b6daf3bfb4"
+          }
+        },
+        {
+          "client_id": "212821278386-dppuo0d5brpq1n63g1bqtc0u6tedg7q5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAwewZn8Nnt0-eADd__gmKjVu_OhJli1A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "212821278386-p871rb4hmhckgq8iscb2vle0cskdo9q6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

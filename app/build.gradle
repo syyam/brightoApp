@@ -24,6 +24,10 @@ android {
             java.srcDirs = ['src/main/java', 'src/main/java/com/example/syyam/jobsapp/Models/colorFinder']
         }
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 }
 
 dependencies {
@@ -36,7 +40,7 @@ dependencies {
     implementation 'com.android.support:design:28.0.0'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
 
-
+    implementation 'com.kaopiz:kprogresshud:1.2.0'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation('com.github.bumptech.glide:glide:4.9.0') {
@@ -44,13 +48,20 @@ dependencies {
     }
 
 
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'com.android.support:cardview-v7:28.0.0'
 
     implementation 'net.skoumal.fragmentback:fragment-back:0.2.3'
 
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
 
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
+apply plugin: 'com.google.gms.google-services'

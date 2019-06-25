@@ -13,18 +13,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+
 
 import net.skoumal.fragmentback.BackFragmentHelper;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
+    int currentPage = 0;
     private class PageListener extends ViewPager.SimpleOnPageChangeListener { // to change tab icons on selection
         public void onPageSelected(int position) {
             int noOfPages = 6;
-            int currentPage = position;
+             currentPage = position;
+            invalidateOptionsMenu();
             if (currentPage == 0) {
                 tabLayout.getTabAt(0).setIcon(tabIconsSelected[0]);
                 tabLayout.getTabAt(1).setIcon(tabIcons[1]);
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity
                 tabLayout.getTabAt(3).setIcon(tabIcons[3]);
                 tabLayout.getTabAt(4).setIcon(tabIcons[4]);
                 tabLayout.getTabAt(5).setIcon(tabIcons[5]);
+                toolbar.setTitle("Color Finder");
 
             } else if (currentPage == 1) {
                 tabLayout.getTabAt(0).setIcon(tabIcons[0]);
@@ -40,6 +44,7 @@ public class MainActivity extends AppCompatActivity
                 tabLayout.getTabAt(3).setIcon(tabIcons[3]);
                 tabLayout.getTabAt(4).setIcon(tabIcons[4]);
                 tabLayout.getTabAt(5).setIcon(tabIcons[5]);
+                toolbar.setTitle("Product Finder");
 
             } else if (currentPage == 2) {
                 tabLayout.getTabAt(0).setIcon(tabIcons[0]);
@@ -48,6 +53,7 @@ public class MainActivity extends AppCompatActivity
                 tabLayout.getTabAt(3).setIcon(tabIcons[3]);
                 tabLayout.getTabAt(4).setIcon(tabIcons[4]);
                 tabLayout.getTabAt(5).setIcon(tabIcons[5]);
+                toolbar.setTitle("Color Selector");
             } else if (currentPage == 3) {
                 tabLayout.getTabAt(0).setIcon(tabIcons[0]);
                 tabLayout.getTabAt(1).setIcon(tabIcons[1]);
@@ -55,6 +61,7 @@ public class MainActivity extends AppCompatActivity
                 tabLayout.getTabAt(3).setIcon(tabIconsSelected[3]);
                 tabLayout.getTabAt(4).setIcon(tabIcons[4]);
                 tabLayout.getTabAt(5).setIcon(tabIcons[5]);
+                toolbar.setTitle("Luxury Finish");
             } else if (currentPage == 4) {
                 tabLayout.getTabAt(0).setIcon(tabIcons[0]);
                 tabLayout.getTabAt(1).setIcon(tabIcons[1]);
@@ -62,6 +69,7 @@ public class MainActivity extends AppCompatActivity
                 tabLayout.getTabAt(3).setIcon(tabIcons[3]);
                 tabLayout.getTabAt(4).setIcon(tabIconsSelected[4]);
                 tabLayout.getTabAt(5).setIcon(tabIcons[5]);
+                toolbar.setTitle("Product");
             } else if (currentPage == 5) {
                 tabLayout.getTabAt(0).setIcon(tabIcons[0]);
                 tabLayout.getTabAt(1).setIcon(tabIcons[1]);
@@ -69,6 +77,7 @@ public class MainActivity extends AppCompatActivity
                 tabLayout.getTabAt(3).setIcon(tabIcons[3]);
                 tabLayout.getTabAt(4).setIcon(tabIcons[4]);
                 tabLayout.getTabAt(5).setIcon(tabIconsSelected[5]);
+                toolbar.setTitle("Store Locator");
             }
         }
     }
@@ -101,6 +110,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Color Finder");
         setSupportActionBar(toolbar);
 
 
@@ -160,7 +170,17 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+
+        if(currentPage==0 || currentPage==4){
+            menu.getItem(0).setVisible(true);
+        }
+        else{
+            menu.getItem(0).setVisible(false);
+        }
+
         return true;
     }
 
@@ -168,13 +188,16 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // as you specify a parent activity in AndroidManifest.network_security_config.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
             Intent L = new Intent(this, SearchActivity.class);
             startActivity(L);
+        }
+        else if(id==R.id.filter){
+            startActivity(new Intent(MainActivity.this,FiltersActivity.class));
         }
 
 

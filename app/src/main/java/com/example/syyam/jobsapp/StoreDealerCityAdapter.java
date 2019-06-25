@@ -1,5 +1,6 @@
 package com.example.syyam.jobsapp;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -45,12 +46,16 @@ public class StoreDealerCityAdapter extends RecyclerView.Adapter<StoreDealerCity
         holder.c_name.setText(name);
         holder.address.setText(dealercities.getAddress().toString());
 
-//        holder.countrycityLL.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+
+        holder.countrycityLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context.getContext(), MapActivity.class);
+                intent.putExtra("lat",dealercities.getLatitude());
+                intent.putExtra("lng",dealercities.getLongitude());
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -69,6 +74,7 @@ public class StoreDealerCityAdapter extends RecyclerView.Adapter<StoreDealerCity
             super(itemView);
             c_name = itemView.findViewById(R.id.c_name);
             address = itemView.findViewById(R.id.address);
+            countrycityLL = itemView.findViewById(R.id.countrycityLL);
         }
     }
 }

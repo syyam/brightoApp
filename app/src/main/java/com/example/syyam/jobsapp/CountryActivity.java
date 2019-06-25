@@ -1,7 +1,6 @@
 package com.example.syyam.jobsapp;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.syyam.jobsapp.Models.Countries;
 import com.example.syyam.jobsapp.Utils.Config;
+import com.example.syyam.jobsapp.Utils.Extras;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,11 +33,11 @@ public class CountryActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.countryList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        submitBtn=(Button) findViewById(R.id.submitBtn);
+        submitBtn = (Button) findViewById(R.id.submitBtn);
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent l=new Intent(CountryActivity.this,MainActivity.class);
+                Intent l = new Intent(CountryActivity.this, MainActivity.class);
                 startActivity(l);
             }
         });
@@ -45,7 +45,7 @@ public class CountryActivity extends AppCompatActivity {
     }
 
     public void getData() {
-
+        Extras.showLoader(CountryActivity.this);
         Retrofit build = new Retrofit
                 .Builder()
                 .baseUrl(Config.BASE_URL)
@@ -61,15 +61,17 @@ public class CountryActivity extends AppCompatActivity {
         countriesCall.enqueue(new Callback<Countries>() {
             @Override
             public void onResponse(Call<Countries> call, Response<Countries> response) {
-
+                Extras.hideLoader();
                 Countries list = response.body();
-                recyclerView.setAdapter(new CountryAdapter(CountryActivity.this, list.getData()));
+                if (list != null)
+                    recyclerView.setAdapter(new CountryAdapter(CountryActivity.this, list.getData()));
 
                 //Toast.makeText(getContext(), "success",Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Call<Countries> call, Throwable t) {
+                Extras.hideLoader();
                 Toast.makeText(CountryActivity.this, "Failure", Toast.LENGTH_LONG).show();
             }
         });

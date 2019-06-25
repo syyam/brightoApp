@@ -84,6 +84,7 @@ public class DesignerPalettesAdapter extends RecyclerView.Adapter<DesignerPalett
         int g3 = palettes.getColor3().getColor().getG();
         int b3 = palettes.getColor3().getColor().getB();
 
+        holder.pallteby.setText(palettes.getPalleteBy());
         holder.name.setText(name);
         holder.likes.setText(palettes.getLikes() + " Likes");
 
@@ -206,6 +207,7 @@ public class DesignerPalettesAdapter extends RecyclerView.Adapter<DesignerPalett
         private LinearLayout LL;
         private View C1, C2, C3;
         private ImageView fav;
+        private TextView pallteby;
         private boolean loved = false;
         private int PID;
 
@@ -225,6 +227,7 @@ public class DesignerPalettesAdapter extends RecyclerView.Adapter<DesignerPalett
             C3 = itemView.findViewById(R.id.color3);
 
             fav = itemView.findViewById(R.id.fav);
+            pallteby = itemView.findViewById(R.id.plateby);
 
 
 //            fav.setOnClickListener(new View.OnClickListener() {

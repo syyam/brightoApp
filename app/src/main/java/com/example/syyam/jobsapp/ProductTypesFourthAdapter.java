@@ -31,8 +31,8 @@ import java.util.List;
 public class ProductTypesFourthAdapter extends RecyclerView.Adapter<ProductTypesFourthAdapter.CF_ViewHolder> {
 
     private AdapterCallback mAdapterCallback;
-
-    private ProductTypes context;
+    int type;
+    private Context context;
     private List<FinishSpecificDatum> colors;
     private int lastSelectedPosition = -1;
     AdapterCallback callback;
@@ -42,7 +42,8 @@ public class ProductTypesFourthAdapter extends RecyclerView.Adapter<ProductTypes
         void onItemClicked(int position, Integer id, String Sender);
     }
 
-    public ProductTypesFourthAdapter(ProductTypes context, List<FinishSpecificDatum> colors, AdapterCallback callback) {
+    public ProductTypesFourthAdapter(Context context, List<FinishSpecificDatum> colors, AdapterCallback callback,int type) {
+        this.type=type;
         this.context = context;
         this.colors = colors;
         this.callback = callback;
@@ -54,7 +55,12 @@ public class ProductTypesFourthAdapter extends RecyclerView.Adapter<ProductTypes
     public CF_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.item_product_types, parent, false);
+        View view;
+        if (type == 0)
+            view = inflater.inflate(R.layout.item_product_types, parent, false);
+        else
+            view = inflater.inflate(R.layout.itemfilter, parent, false);
+
         return new CF_ViewHolder(view);
     }
 
@@ -69,7 +75,8 @@ public class ProductTypesFourthAdapter extends RecyclerView.Adapter<ProductTypes
         String imgurl = Config.IMAGE_URL + colors.getImage();
 
         holder.topTextView.setText(topText);
-        Glide.with(context).load(imgurl).into(holder.imageView);
+        if(type==0)
+       Glide.with(context).load(imgurl).into(holder.imageView);
 
         holder.radioButton.setChecked(lastSelectedPosition == position);
 

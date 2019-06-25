@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.syyam.CalculateActivity;
 import com.example.syyam.jobsapp.Fragments.ProductFragment;
 import com.example.syyam.jobsapp.Models.Like;
 import com.example.syyam.jobsapp.Models.ProductDetailModel.ProductDetailCity;
@@ -36,6 +37,7 @@ import com.example.syyam.jobsapp.Models.ShadesProduct.ShadesProduct;
 import com.example.syyam.jobsapp.Models.params.CountryParam;
 import com.example.syyam.jobsapp.Models.params.ProductParam;
 import com.example.syyam.jobsapp.Utils.Config;
+import com.example.syyam.jobsapp.Utils.Extras;
 
 import java.util.List;
 
@@ -62,6 +64,7 @@ public class ProductDetails extends AppCompatActivity implements NavigationView.
     private DrawerLayout dl;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
+    private int spreadingValue;
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
@@ -157,6 +160,14 @@ public class ProductDetails extends AppCompatActivity implements NavigationView.
         bottomTextView = (TextView) findViewById(R.id.bottomTextView);
         details = (TextView) findViewById(R.id.details);
         floatingActionButton = (FloatingActionButton) findViewById(R.id.floatBtn);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProductDetails.this, CalculateActivity.class);
+                intent.putExtra("spreading", spreadingValue);
+                startActivity(intent);
+            }
+        });
 
 
         if (getIntent().hasExtra("product_id")) {
@@ -195,6 +206,7 @@ public class ProductDetails extends AppCompatActivity implements NavigationView.
                 if (response != null) {
                     ProductDetailCity list = response.body();
 
+                    spreadingValue = response.body().getData().get(0).getSpreading();
                     String getName = response.body().getData().get(0).getName();
                     String getCategoryName = response.body().getData().get(0).getCategory().getName();
                     String detail = response.body().getData().get(0).getDescription();
@@ -221,6 +233,7 @@ public class ProductDetails extends AppCompatActivity implements NavigationView.
     }
 
     public void getFurtherData(final int p_id) {
+        Extras.showLoader(ProductDetails.this);
         Retrofit build = new Retrofit
                 .Builder()
                 .baseUrl(Config.BASE_URL)
@@ -237,7 +250,7 @@ public class ProductDetails extends AppCompatActivity implements NavigationView.
         productsCall.enqueue(new Callback<ShadesProduct>() {
             @Override
             public void onResponse(Call<ShadesProduct> call, Response<ShadesProduct> response) {
-
+                Extras.hideLoader();
                 if (response != null) {
                     ShadesProduct list = response.body();
 
@@ -249,6 +262,7 @@ public class ProductDetails extends AppCompatActivity implements NavigationView.
 
             @Override
             public void onFailure(Call<ShadesProduct> call, Throwable t) {
+                Extras.hideLoader();
                 Toast.makeText(ProductDetails.this, "Failure", Toast.LENGTH_LONG).show();
             }
         });
@@ -326,7 +340,7 @@ public class ProductDetails extends AppCompatActivity implements NavigationView.
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // as you specify a parent activity in AndroidManifest.network_security_config.
         int id = item.getItemId();
 
         if (t.onOptionsItemSelected(item)) {

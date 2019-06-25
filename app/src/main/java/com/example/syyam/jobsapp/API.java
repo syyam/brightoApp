@@ -53,6 +53,11 @@ public interface API {
     @POST("shades/product")
     Call<ShadesProduct> getShadesProduct(@Body ProductParam productParam);
 
+    //
+    @GET("shades")
+    Call<ShadesProduct> getAllShades();
+
+
     //6
     @POST("favourite/shade/like")
     Call<Like> getLikeShade(@Header("Authorization") String token, @Body ShadeParam shadeParam);
