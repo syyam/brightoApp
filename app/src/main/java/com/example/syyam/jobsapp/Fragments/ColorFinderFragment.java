@@ -83,7 +83,7 @@ public class ColorFinderFragment extends Fragment {
         colorFinderCall.enqueue(new Callback<ColorFinder>() {
             @Override
             public void onResponse(Call<ColorFinder> call, Response<ColorFinder> response) {
-Extras.hideLoader();
+                Extras.hideLoader();
                 if (response != null) {
                     ColorFinder list = response.body();
                     recyclerView.setAdapter(new ColorFinderAdapter(ColorFinderFragment.this, list.getData(), cid));

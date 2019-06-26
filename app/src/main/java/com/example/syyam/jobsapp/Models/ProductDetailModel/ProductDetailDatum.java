@@ -45,9 +45,17 @@ public class ProductDetailDatum {
     @SerializedName("Countries")
     @Expose
     private List<Country> countries = null;
-    @SerializedName("ProjectType")
+    @SerializedName("ProjectTypes")
     @Expose
-    private ProjectType projectType;
+    private List<ProjectType> projectTypes = null;
+
+    public List<ProjectType> getProjectTypes() {
+        return projectTypes;
+    }
+
+    public void setProjectTypes(List<ProjectType> projectTypes) {
+        this.projectTypes = projectTypes;
+    }
     @SerializedName("Category")
     @Expose
     private Category category;
@@ -114,13 +122,7 @@ public class ProductDetailDatum {
         this.countries = countries;
     }
 
-    public ProjectType getProjectType() {
-        return projectType;
-    }
 
-    public void setProjectType(ProjectType projectType) {
-        this.projectType = projectType;
-    }
 
     public Category getCategory() {
         return category;

@@ -132,6 +132,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                             == PackageManager.PERMISSION_GRANTED) {
 
                         mMap.setMyLocationEnabled(true);
+                        mMap.clear();
+                        LatLng location = new LatLng(lat, lng);
+
+                        if ( mMap != null) {
+                            Marker marker = mMap.addMarker(new MarkerOptions().position(location)
+                                    .title("Nadir")
+                                    .snippet("12"));
+
+                            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(location, 15);
+                            mMap.animateCamera(cameraUpdate);
+
+                        }
                     }
 
                 } else {

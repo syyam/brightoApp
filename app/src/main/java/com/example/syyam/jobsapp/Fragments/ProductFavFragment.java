@@ -76,7 +76,7 @@ public class ProductFavFragment extends Fragment {
 
                 LikedProducts list = response.body();
                 if (list.getData() != null) {
-                    recyclerView.setAdapter(new ProductFavAdapter(ProductFavFragment.this, list.getData()));
+                    recyclerView.setAdapter(new ProductFavAdapter(getContext(), list.getData()));
 
                 }
 

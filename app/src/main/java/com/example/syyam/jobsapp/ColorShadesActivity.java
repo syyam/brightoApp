@@ -22,6 +22,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ColorShadesActivity extends BottomSheetDialogFragment {
 
     private BottomSheetBehavior mBehavior;
+    private ImageView backIcon;
 //    private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback;
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
@@ -86,20 +88,22 @@ public class ColorShadesActivity extends BottomSheetDialogFragment {
         public void onStateChanged(@NonNull View bottomSheet, int newState) {
             switch (newState) {
       case BottomSheetBehavior.STATE_HIDDEN:
-          Toast.makeText(getContext(), "STATE_HIDDEN", Toast.LENGTH_SHORT).show();
+//          Toast.makeText(getContext(), "STATE_HIDDEN", Toast.LENGTH_SHORT).show();
           dismiss();
           break;
       case BottomSheetBehavior.STATE_EXPANDED:
-          Toast.makeText(getContext(), "STATE_EXPANDED", Toast.LENGTH_SHORT).show();
+//          Toast.makeText(getContext(), "STATE_EXPANDED", Toast.LENGTH_SHORT).show();
+//          dismiss();
           break;
       case BottomSheetBehavior.STATE_COLLAPSED:
-          Toast.makeText(getContext(), "STATE_COLLAPSED", Toast.LENGTH_SHORT).show();
+//          Toast.makeText(getContext(), "STATE_COLLAPSED", Toast.LENGTH_SHORT).show();
+          dismiss();
           break;
       case BottomSheetBehavior.STATE_DRAGGING:
-          Toast.makeText(getContext(), "STATE_DRAGGING", Toast.LENGTH_SHORT).show();
+//          Toast.makeText(getContext(), "STATE_DRAGGING", Toast.LENGTH_SHORT).show();
           break;
       case BottomSheetBehavior.STATE_SETTLING:
-          Toast.makeText(getContext(), "STATE_SETTLING", Toast.LENGTH_SHORT).show();
+//          Toast.makeText(getContext(), "STATE_SETTLING", Toast.LENGTH_SHORT).show();
           break;
     }
 
@@ -158,6 +162,13 @@ public class ColorShadesActivity extends BottomSheetDialogFragment {
         int spacing = 0; // 50px
         boolean includeEdge = false;
         recyclerView = (RecyclerView) view.findViewById(R.id.colorShadesList);
+        backIcon =  view.findViewById(R.id.imageClicke);
+        backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);

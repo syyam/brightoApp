@@ -105,6 +105,7 @@ public class ProductFragment extends Fragment {
     }
 
     private void getData() {
+
         Retrofit build = new Retrofit
                 .Builder()
                 .baseUrl(Config.BASE_URL)
@@ -130,6 +131,7 @@ public class ProductFragment extends Fragment {
                 if (response != null) {
                     Products list = response.body();
                     if (list != null)
+                        recyclerView.setBackground(null);
                         recyclerView.setAdapter(new ProductAdapter(getContext(), list.getData(), cid, true, null));
 
                     //Toast.makeText(getContext(), "success",Toast.LENGTH_LONG).show();

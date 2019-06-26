@@ -56,7 +56,8 @@ public class ProductTypes extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            onBackPressed();  return true;
+            onBackPressed();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -156,8 +157,7 @@ public class ProductTypes extends AppCompatActivity
             thirdBox.setBackground(getResources().getDrawable(R.drawable.grayf2_noleftbordered_button));
             SenderName = "second";
 
-        }
-        else if(SenderName.equals("second") && SenderName != null) {
+        } else if (SenderName.equals("second") && SenderName != null) {
 
             getSecondData(senderId); // SurfaceSpecific
             //thirdBox.setBackgroundColor(ContextCompat.getColor(this, R.color.GrayF2));
@@ -165,8 +165,7 @@ public class ProductTypes extends AppCompatActivity
             secondBox.setBackground(getResources().getDrawable(R.drawable.grayf2_noleftbordered_button));
 
             SenderName = "first";
-        }
-        else if (SenderName.equals("first") && SenderName != null) {
+        } else if (SenderName.equals("first") && SenderName != null) {
             getData(); // CategorySpecific
 
 
@@ -225,6 +224,8 @@ public class ProductTypes extends AppCompatActivity
      * Project Type
      * */
     private void getData() {
+
+
         Extras.showLoader(ProductTypes.this);
         Retrofit build = new Retrofit
                 .Builder()
@@ -247,8 +248,9 @@ public class ProductTypes extends AppCompatActivity
                 Extras.hideLoader();
                 if (response != null) {
 
+
                     ProductType list = response.body();
-                    recyclerView.setAdapter(new ProductTypesAdapter(ProductTypes.this, list.getData(), (ProductTypesAdapter.AdapterCallback) ProductTypes.this,0));
+                    recyclerView.setAdapter(new ProductTypesAdapter(ProductTypes.this, list.getData(), (ProductTypesAdapter.AdapterCallback) ProductTypes.this, 0));
 
                     //Toast.makeText(getContext(), "success",Toast.LENGTH_LONG).show();
                 }
@@ -268,6 +270,7 @@ public class ProductTypes extends AppCompatActivity
      * @Params=projectTypeId
      * */
     private void getSecondData(int id) {
+
         Extras.showLoader(ProductTypes.this);
         Retrofit build = new Retrofit
                 .Builder()
@@ -293,7 +296,7 @@ public class ProductTypes extends AppCompatActivity
                 Extras.hideLoader();
                 if (response != null) {
                     CategorySpecific list = response.body();
-                    recyclerView.setAdapter(new ProductTypesSecondAdapter(ProductTypes.this, list.getData(), (ProductTypesSecondAdapter.AdapterCallback) ProductTypes.this,0));
+                    recyclerView.setAdapter(new ProductTypesSecondAdapter(ProductTypes.this, list.getData(), (ProductTypesSecondAdapter.AdapterCallback) ProductTypes.this, 0));
 
                     //Toast.makeText(getContext(), "success",Toast.LENGTH_LONG).show();
                 }
@@ -313,6 +316,7 @@ public class ProductTypes extends AppCompatActivity
      * @Params=categoryId
      * */
     private void getThirdData(int id) {
+
         Extras.showLoader(ProductTypes.this);
         Retrofit build = new Retrofit
                 .Builder()
@@ -333,8 +337,9 @@ public class ProductTypes extends AppCompatActivity
 
                 Extras.hideLoader();
                 if (response != null) {
+
                     SurfaceSpecific list = response.body();
-                    recyclerView.setAdapter(new ProductTypesThirdAdapter(ProductTypes.this, list.getData(), (ProductTypesThirdAdapter.AdapterCallback) ProductTypes.this,0));
+                    recyclerView.setAdapter(new ProductTypesThirdAdapter(ProductTypes.this, list.getData(), (ProductTypesThirdAdapter.AdapterCallback) ProductTypes.this, 0));
 
                     //Toast.makeText(getContext(), "success",Toast.LENGTH_LONG).show();
                 }
@@ -354,6 +359,7 @@ public class ProductTypes extends AppCompatActivity
      * @Params=surfaceId
      * */
     private void getFourthData(int id) {
+
         Extras.showLoader(ProductTypes.this);
         Retrofit build = new Retrofit
                 .Builder()
@@ -373,8 +379,9 @@ public class ProductTypes extends AppCompatActivity
             public void onResponse(Call<FinishSpecific> call, Response<FinishSpecific> response) {
                 Extras.hideLoader();
                 if (response != null) {
+
                     FinishSpecific list = response.body();
-                    recyclerView.setAdapter(new ProductTypesFourthAdapter(ProductTypes.this, list.getData(), (ProductTypesFourthAdapter.AdapterCallback) ProductTypes.this,0));
+                    recyclerView.setAdapter(new ProductTypesFourthAdapter(ProductTypes.this, list.getData(), (ProductTypesFourthAdapter.AdapterCallback) ProductTypes.this, 0));
 
                     //Toast.makeText(getContext(), "success",Toast.LENGTH_LONG).show();
                 }

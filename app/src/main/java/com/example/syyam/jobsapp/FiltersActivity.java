@@ -134,14 +134,14 @@ public class FiltersActivity extends AppCompatActivity
             SenderName = "second";
 
         }
-        if (SenderName.equals("second") && SenderName != null) {
+        else if (SenderName.equals("second") && SenderName != null) {
 
             getSecondData(senderId); // SurfaceSpecific
             //thirdBox.setBackgroundColor(ContextCompat.getColor(this, R.color.GrayF2));
 //            thirdBox.setBackground(getResources().getDrawable(R.drawable.grayf2_noleftbordered_button));
             SenderName = "first";
         }
-        if (SenderName.equals("first") && SenderName != null) {
+        else if (SenderName.equals("first") && SenderName != null) {
             getData(); // CategorySpecific
 
 

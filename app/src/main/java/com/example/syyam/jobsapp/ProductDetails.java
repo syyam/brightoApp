@@ -29,6 +29,7 @@ import com.bumptech.glide.Glide;
 import com.example.syyam.CalculateActivity;
 import com.example.syyam.jobsapp.Fragments.ProductFragment;
 import com.example.syyam.jobsapp.Models.Like;
+import com.example.syyam.jobsapp.Models.ProductDetailModel.Category;
 import com.example.syyam.jobsapp.Models.ProductDetailModel.ProductDetailCity;
 import com.example.syyam.jobsapp.Models.ProductDetailModel.ProductDetailDatum;
 import com.example.syyam.jobsapp.Models.Products;
@@ -214,13 +215,18 @@ public class ProductDetails extends AppCompatActivity implements NavigationView.
 
                     spreadingValue = response.body().getData().get(0).getSpreading();
                     String getName = response.body().getData().get(0).getName();
-                    String getCategoryName = response.body().getData().get(0).getCategory().getName();
+                    Category category=null;
+                    if(response.body().getData().get(0).getCategory()!=null) {
+                        category = response.body().getData().get(0).getCategory();
+                        bottomTextView.setText(category.getName());
+                    }
+
                     String detail = response.body().getData().get(0).getDescription();
                     String imgurl = Config.IMAGE_URL + response.body().getData().get(0).getImage();
                     String cvr_imgurl = Config.IMAGE_URL + response.body().getData().get(0).getCoverImage();
 
                     topTextView.setText(getName);
-                    bottomTextView.setText(getCategoryName);
+
                     details.setText(detail);
                     Glide.with(ProductDetails.this).load(imgurl).into(image);
                     Glide.with(ProductDetails.this).load(cvr_imgurl).into(cover);
@@ -259,7 +265,6 @@ public class ProductDetails extends AppCompatActivity implements NavigationView.
                 Extras.hideLoader();
                 if (response != null) {
                     ShadesProduct list = response.body();
-
                     recyclerView.setAdapter(new ProductDetailsAdapter(ProductDetails.this, list.getData(), p_id));
 
 //                    Toast.makeText(ProductDetails.this, "success"+data,Toast.LENGTH_LONG).show();

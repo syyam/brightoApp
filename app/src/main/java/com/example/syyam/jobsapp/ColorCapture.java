@@ -26,7 +26,7 @@ import com.example.syyam.jobsapp.Models.ShadesProduct.ShadesProduct;
 import com.example.syyam.jobsapp.Utils.Config;
 import com.example.syyam.jobsapp.Utils.Extras;
 
-import org.reactivestreams.Subscription;
+
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,10 +41,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import io.reactivex.subjects.PublishSubject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -64,6 +61,10 @@ public class ColorCapture extends AppCompatActivity {
 
     HashMap<Integer, Float> avgMapList = new HashMap<>();
     HashMap<Integer, DP_Datum> allPallateMap = new HashMap<>();
+    private Datum firstColorData;
+    private Datum secondColorData;
+    private Datum thirdColorData;
+    private Datum d;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -71,10 +72,10 @@ public class ColorCapture extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_capture);
         getData();
-        getAllPallete();
-        firstView=findViewById(R.id.first);
-        secondView=findViewById(R.id.second);
-        thirdView=findViewById(R.id.third);
+//        getAllPallete();
+        firstView = findViewById(R.id.first);
+        secondView = findViewById(R.id.second);
+        thirdView = findViewById(R.id.third);
 
         imageView = (ImageView) findViewById(R.id.imageView);
         textView = (TextView) findViewById(R.id.textView);
@@ -190,8 +191,9 @@ public class ColorCapture extends AppCompatActivity {
             public void onResponse(Call<DesignerPalettes> call, Response<DesignerPalettes> response) {
 
                 palleteList = response.body().getData();
-                for(int i=0;i<palleteList.size();i++){
-                    allPallateMap.put(palleteList.get(i).getId(),palleteList.get(i));
+
+                for (int i = 0; i < palleteList.size(); i++) {
+                    allPallateMap.put(palleteList.get(i).getId(), palleteList.get(i));
                 }
 
                 if (response != null) {
@@ -212,8 +214,7 @@ public class ColorCapture extends AppCompatActivity {
         });
     }
 
-    private Subscription mTextWatchSubscription;
-    private PublishSubject<String> mSearchResultsSubject;
+
 
     //     mSearchResultsSubject.onNext(s.toString());
 
@@ -236,16 +237,45 @@ public class ColorCapture extends AppCompatActivity {
         avgMapList = sortByValue(avgMapList);
 
         Map.Entry<Integer, Float> entry = avgMapList.entrySet().iterator().next();
-
         textView.setBackgroundColor(Color.rgb(datumList.get(entry.getKey()).getColor().getR(), datumList.get(entry.getKey()).getColor().getG(), datumList.get(entry.getKey()).getColor().getB()));
+        d=datumList.get(entry.getKey());
+        textView.setText(d.getName()+"\n"+d.getItemCode()+"\n"+d.getProducts().get(0).getName());
+        try {
+            int id = datumList.get(entry.getKey()).getProducts().get(0).getId();
+            for (int i = 0; i < datumList.size(); i++) {
+                if (datumList.get(i).getProducts().get(0).getId() == id) {
 
-        DP_Datum pallete=allPallateMap.get(datumList.get(entry.getKey()).getId());
-        try{firstView.setBackgroundColor(Color.rgb(pallete.getColor1().getColor().getR(), pallete.getColor1().getColor().getG(), pallete.getColor1().getColor().getB()));
-            secondView.setBackgroundColor(Color.rgb(pallete.getColor2().getColor().getR(), pallete.getColor2().getColor().getG(), pallete.getColor2().getColor().getB()));
-            thirdView.setBackgroundColor(Color.rgb(pallete.getColor3().getColor().getR(), pallete.getColor3().getColor().getG(), pallete.getColor3().getColor().getB()));
-        }catch(Exception ex){
-            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                    if (firstColorData == null)
+                        firstColorData = datumList.get(i);
+                    else if (secondColorData == null)
+                        secondColorData = datumList.get(i);
+                    else
+                    {
+                        thirdColorData = datumList.get(i);
+                        break;
+                    }
+
+
+                }
+            }
+            firstView.setBackgroundColor(Color.rgb(firstColorData.getColor().getR(), firstColorData.getColor().getG(), firstColorData.getColor().getB()));
+            secondView.setBackgroundColor(Color.rgb(secondColorData.getColor().getR(), secondColorData.getColor().getG(), secondColorData.getColor().getB()));
+            thirdView.setBackgroundColor(Color.rgb(thirdColorData.getColor().getR(), thirdColorData.getColor().getG(), thirdColorData.getColor().getB()));
+            firstColorData=null;
+            secondColorData=null;
+            thirdColorData=null;
+
+        } catch (Exception ex) {
+//            Toast.makeText(ColorCapture.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
+
+//        DP_Datum pallete=allPallateMap.get(datumList.get(entry.getKey()).getId());
+//        try{firstView.setBackgroundColor(Color.rgb(pallete.getColor1().getColor().getR(), pallete.getColor1().getColor().getG(), pallete.getColor1().getColor().getB()));
+//            secondView.setBackgroundColor(Color.rgb(pallete.getColor2().getColor().getR(), pallete.getColor2().getColor().getG(), pallete.getColor2().getColor().getB()));
+//            thirdView.setBackgroundColor(Color.rgb(pallete.getColor3().getColor().getR(), pallete.getColor3().getColor().getG(), pallete.getColor3().getColor().getB()));
+//        }catch(Exception ex){
+//            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+//        }
 
 
     }

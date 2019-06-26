@@ -6,11 +6,13 @@ import com.example.syyam.jobsapp.Models.Countries;
 import com.example.syyam.jobsapp.Models.DealerCity;
 import com.example.syyam.jobsapp.Models.DesignerPalettesModel.DesignerPalettes;
 import com.example.syyam.jobsapp.Models.FinishSpecific;
+import com.example.syyam.jobsapp.Models.FurnishFinish;
 import com.example.syyam.jobsapp.Models.Like;
 import com.example.syyam.jobsapp.Models.LikedProducts;
 import com.example.syyam.jobsapp.Models.LikedShades;
 import com.example.syyam.jobsapp.Models.Login;
 import com.example.syyam.jobsapp.Models.ProductDetailModel.ProductDetailCity;
+import com.example.syyam.jobsapp.Models.ProductDetailModel.ProductDetailDatum;
 import com.example.syyam.jobsapp.Models.ProductType;
 import com.example.syyam.jobsapp.Models.Products;
 import com.example.syyam.jobsapp.Models.Register;
@@ -32,12 +34,15 @@ import com.example.syyam.jobsapp.Models.params.ShadeParam;
 import com.example.syyam.jobsapp.Models.params.SurfaceParam;
 import com.example.syyam.jobsapp.Models.params.UpdateUserParam;
 
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Query;
 
 
 public interface API {
@@ -116,6 +121,11 @@ public interface API {
     @POST("dealer/city")
     Call<DealerCity> getDealerCities(@Body CityParam cityParam);
 
+    //24
+
+    @POST("forgot-password")
+    Call<ResponseBody> forgotPassword(@Query("email") String email);
+
     //25
 //    @POST("dealer/specific")
 //    Call<Countries> getDealerSpecific(@Body DealerParam dealerParam);
@@ -139,10 +149,19 @@ public interface API {
     //20
     @GET("favourite/products")
     Call<LikedProducts> getLikedProducts(@Header("Authorization") String token);
+//35
+    @GET("favourite/pallets")
+    Call<LikedProducts> getLikePallets(@Header("Authorization") String token);
 
+    //32
+    @GET("luxury-finish")
+    Call<FurnishFinish> getAllLuxuryFinish();
     //27
     @POST("login")
     Call<Login> getLogin(@Body LoginParam loginParam);
+
+
+
 
     //26
     @POST("signup")

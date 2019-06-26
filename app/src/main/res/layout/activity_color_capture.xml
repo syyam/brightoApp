@@ -7,58 +7,69 @@
     android:orientation="vertical"
     tools:context=".ColorCapture">
 
-<android.support.v7.widget.Toolbar
-    android:id="@+id/toolbar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <ImageView
         android:id="@+id/imageView"
-        android:scaleType="fitXY"
+        android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
-        />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:weightSum="2"
-    android:orientation="vertical"
-    android:layout_height="wrap_content">
-    <TextView
         android:layout_weight="1"
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-      android:background="@color/GrayD3"
-        android:layout_margin="1dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY" />
+
     <LinearLayout
-        android:layout_weight="1"
+        android:id="@+id/lyt"
         android:layout_width="match_parent"
-        android:weightSum="3"
-        android:layout_height="0dp">
-        <View
-            android:id="@+id/first"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
             android:layout_margin="1dp"
-            android:background="@color/Gray96"
-            android:layout_height="wrap_content"/>
-        <View
-            android:id="@+id/second"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_margin="1dp"
-            android:background="@color/Gray41"
-            android:layout_height="wrap_content"/>
-        <View
-            android:id="@+id/third"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_margin="1dp"
-            android:background="@color/Gray5A"
-            android:layout_height="wrap_content"/>
+            android:background="@color/GrayD3"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text=""
+            android:textColor="@color/White"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:weightSum="3">
+
+            <View
+                android:id="@+id/first"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@color/Gray96" />
+
+            <View
+                android:id="@+id/second"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@color/Gray41" />
+
+            <View
+                android:id="@+id/third"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@color/Gray5A" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
 
 
 </LinearLayout>

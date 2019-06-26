@@ -2,12 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.nipu.navigationwithtabs.two">
+
+>
 
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/productList"
+        android:background="@drawable/background_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >

@@ -24,12 +24,12 @@ import com.example.syyam.jobsapp.Utils.Config;
 import java.util.List;
 
 public class ProductFavAdapter extends RecyclerView.Adapter<ProductFavAdapter.CF_ViewHolder> {
-    private ProductFavFragment context;
+    private Context context;
     private List<LikedProductsDatum> shades;
     private int lastSelectedPosition = 0;
 
 
-    public ProductFavAdapter(ProductFavFragment context, List<LikedProductsDatum> shades) {
+    public ProductFavAdapter(Context context, List<LikedProductsDatum> shades) {
         this.context = context;
         this.shades = shades;
     }

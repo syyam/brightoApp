@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,14 +37,15 @@ public class ProductTypesFourthAdapter extends RecyclerView.Adapter<ProductTypes
     private List<FinishSpecificDatum> colors;
     private int lastSelectedPosition = -1;
     AdapterCallback callback;
+    RadioButton lastChecked;
 
 
     public static interface AdapterCallback {
         void onItemClicked(int position, Integer id, String Sender);
     }
 
-    public ProductTypesFourthAdapter(Context context, List<FinishSpecificDatum> colors, AdapterCallback callback,int type) {
-        this.type=type;
+    public ProductTypesFourthAdapter(Context context, List<FinishSpecificDatum> colors, AdapterCallback callback, int type) {
+        this.type = type;
         this.context = context;
         this.colors = colors;
         this.callback = callback;
@@ -57,7 +59,7 @@ public class ProductTypesFourthAdapter extends RecyclerView.Adapter<ProductTypes
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view;
         if (type == 0)
-            view = inflater.inflate(R.layout.item_product_types, parent, false);
+            view = inflater.inflate(R.layout.item_product_typess, parent, false);
         else
             view = inflater.inflate(R.layout.itemfilter, parent, false);
 
@@ -75,8 +77,8 @@ public class ProductTypesFourthAdapter extends RecyclerView.Adapter<ProductTypes
         String imgurl = Config.IMAGE_URL + colors.getImage();
 
         holder.topTextView.setText(topText);
-        if(type==0)
-       Glide.with(context).load(imgurl).into(holder.imageView);
+        if (type == 0)
+            Glide.with(context).load(imgurl).into(holder.imageView);
 
         holder.radioButton.setChecked(lastSelectedPosition == position);
 
@@ -97,7 +99,13 @@ public class ProductTypesFourthAdapter extends RecyclerView.Adapter<ProductTypes
             @Override
             public void onClick(View view) {
 
+                if (lastChecked != null) {
+                    lastChecked.setChecked(false);
+
+                }
+                lastChecked = holder.radioButton;
                 if (callback != null) {
+
                     callback.onItemClicked(position, colors.getId(), "fourth");
                 }
             }
@@ -116,6 +124,7 @@ public class ProductTypesFourthAdapter extends RecyclerView.Adapter<ProductTypes
         private TextView topTextView;
         private ImageView imageView;
         private RadioButton radioButton;
+        private RadioGroup radioGroup;
         private int id;
 
 
@@ -125,6 +134,7 @@ public class ProductTypesFourthAdapter extends RecyclerView.Adapter<ProductTypes
             topTextView = itemView.findViewById(R.id.topTextView);
             imageView = itemView.findViewById(R.id.imageView);
             radioButton = itemView.findViewById(R.id.radio_btn);
+            radioGroup = itemView.findViewById(R.id.radio_btn_group);
 
 
 //            mLinearLayout.setOnClickListener(new View.OnClickListener() {
@@ -138,11 +148,17 @@ public class ProductTypesFourthAdapter extends RecyclerView.Adapter<ProductTypes
             radioButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     lastSelectedPosition = getAdapterPosition();
                     notifyDataSetChanged();
+                    if (lastChecked != null) {
+                        lastChecked.setChecked(false);
+                    }
+                    lastChecked = radioButton;
 
                 }
             });
+
         }
 
     }

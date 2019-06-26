@@ -18,12 +18,18 @@
             android:background="@drawable/grayf2_bordered_button"
             android:gravity="center"
             android:orientation="vertical">
-
-            <RadioButton
-                android:id="@+id/radio_btn"
+            <RadioGroup
+                android:id="@+id/radio_btn_group"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end" />
+                android:layout_gravity="end"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/radio_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                     />
+            </RadioGroup>
+
 
             <ImageView
                 android:id="@+id/imageView"
@@ -50,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="asdasd"
-                    android:padding="10dp"
+                    android:padding="5dp"
                     android:textColor="@color/Gray41"
                     android:textSize="15sp" />
 

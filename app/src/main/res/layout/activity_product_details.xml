@@ -39,9 +39,10 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="25dp"
+                android:background="@drawable/circularbordre"
                 android:src="@mipmap/ic_launcher"
                 app:civ_border_color="@color/Gray96"
-                app:civ_border_width="1dp" />
+                app:civ_border_width=".2dp" />
 
             <LinearLayout
                 android:id="@+id/headingLL"
@@ -58,7 +59,7 @@
                 <TextView
                     android:id="@+id/topTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="18dp"
+                    android:layout_height="wrap_content"
                     android:textColor="@color/Gray41"
                     android:textSize="16sp" />
 
