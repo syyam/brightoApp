@@ -3,11 +3,13 @@ package com.example.syyam.jobsapp;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -72,7 +74,14 @@ public class ProductFilter extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_filter);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+        //actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.White)));
+        actionBar.setTitle("Product Finder");
 
+        actionBar.show();
         int spanCount = 2; // 3 columns
         int spacing = 50; // 50px
         boolean includeEdge = true;
@@ -139,9 +148,10 @@ public class ProductFilter extends AppCompatActivity {
         productsCall.enqueue(new Callback<Products>() {
             @Override
             public void onResponse(Call<Products> call, Response<Products> response) {
-Extras.hideLoader();
+                Extras.hideLoader();
                 if (response != null) {
                     Products list = response.body();
+
                     recyclerView.setAdapter(new ProductFilterAdapter(ProductFilter.this, list.getData()));
 
                     //Toast.makeText(getContext(), "success",Toast.LENGTH_LONG).show();
@@ -154,5 +164,17 @@ Extras.hideLoader();
                 Toast.makeText(ProductFilter.this, "Failure", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

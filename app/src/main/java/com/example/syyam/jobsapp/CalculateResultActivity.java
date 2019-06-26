@@ -48,7 +48,7 @@ public class CalculateResultActivity extends AppCompatActivity {
             }
         });
         arearesult =  findViewById(R.id.arearesult);
-        arearesult.setText("Area:"+area);
+        arearesult.setText(String.format("%.2f",area));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

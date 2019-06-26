@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -49,6 +50,17 @@ public class ProductTypes extends AppCompatActivity
     private int senderId;
 
     private int projectId, catergoryId, surfaceId, finishId;
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            onBackPressed();  return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     public static class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
@@ -96,8 +108,6 @@ public class ProductTypes extends AppCompatActivity
         if (SenderName.equals("first")) {
             projectId = senderId; //param
             getSecondData(projectId); // CategorySpecific
-
-
             firstBox.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
             firstBox.setImageResource(R.mipmap.pf_finish_selected);
         } else if (SenderName.equals("second")) {
@@ -142,23 +152,27 @@ public class ProductTypes extends AppCompatActivity
         if (SenderName.equals("third") && SenderName != null) {
             getThirdData(senderId); // FininshSpecific
             //fourthBox.setBackgroundColor(ContextCompat.getColor(this, R.color.GrayF2));
-            fourthBox.setBackground(getResources().getDrawable(R.drawable.grayf2_noleftbordered_button));
+//            fourthBox.setBackground(getResources().getDrawable(R.drawable.grayf2_noleftbordered_button));
+            thirdBox.setBackground(getResources().getDrawable(R.drawable.grayf2_noleftbordered_button));
             SenderName = "second";
 
         }
-        if (SenderName.equals("second") && SenderName != null) {
+        else if(SenderName.equals("second") && SenderName != null) {
 
             getSecondData(senderId); // SurfaceSpecific
             //thirdBox.setBackgroundColor(ContextCompat.getColor(this, R.color.GrayF2));
-            thirdBox.setBackground(getResources().getDrawable(R.drawable.grayf2_noleftbordered_button));
+//            thirdBox.setBackground(getResources().getDrawable(R.drawable.grayf2_noleftbordered_button));
+            secondBox.setBackground(getResources().getDrawable(R.drawable.grayf2_noleftbordered_button));
+
             SenderName = "first";
         }
-        if (SenderName.equals("first") && SenderName != null) {
+        else if (SenderName.equals("first") && SenderName != null) {
             getData(); // CategorySpecific
 
 
             //secondBox.setBackgroundColor(ContextCompat.getColor(this, R.color.GrayF2));
-            secondBox.setBackground(getResources().getDrawable(R.drawable.grayf2_noleftbordered_button));
+//            secondBox.setBackground(getResources().getDrawable(R.drawable.grayf2_noleftbordered_button));
+            firstBox.setBackground(getResources().getDrawable(R.drawable.grayf2_bordered_button));
             SenderName = "zero";
 
         } else
@@ -182,6 +196,7 @@ public class ProductTypes extends AppCompatActivity
         actionBar.setDisplayShowHomeEnabled(true);
         //actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.White)));
         actionBar.setTitle("Product Finder");
+
         actionBar.show();
 
 
@@ -372,4 +387,6 @@ public class ProductTypes extends AppCompatActivity
             }
         });
     }
+
+
 }

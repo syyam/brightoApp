@@ -164,4 +164,8 @@ public interface API {
     @PUT("user/id")
     Call<Like> putUpdateUser(@Body UpdateUserParam updateUserParam);
 
+
+    @GET("pallet")
+    Call<DesignerPalettes> getAllPallettes();
+
 }

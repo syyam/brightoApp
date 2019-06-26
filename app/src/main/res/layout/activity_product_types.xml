@@ -3,23 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
+    android:layout_height="match_parent"
     tools:context=".ProductTypes">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/productTypesList"
         android:layout_width="match_parent"
+        android:layout_above="@+id/lyt"
+        android:layout_alignParentTop="true"
         android:layout_height="wrap_content">
+
 
     </android.support.v7.widget.RecyclerView>
 
 
     <LinearLayout
+        android:id="@+id/lyt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"
+        android:layout_marginTop="30dp"
         android:gravity="center|bottom"
         android:orientation="horizontal">
 

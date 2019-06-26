@@ -130,7 +130,7 @@ public class FiltersActivity extends AppCompatActivity
         if (SenderName.equals("third") && SenderName != null) {
             getThirdData(senderId); // FininshSpecific
             //fourthBox.setBackgroundColor(ContextCompat.getColor(this, R.color.GrayF2));
-            fourthBox.setBackground(getResources().getDrawable(R.drawable.grayf2_noleftbordered_button));
+//            fourthBox.setBackground(getResources().getDrawable(R.drawable.grayf2_noleftbordered_button));
             SenderName = "second";
 
         }
@@ -138,7 +138,7 @@ public class FiltersActivity extends AppCompatActivity
 
             getSecondData(senderId); // SurfaceSpecific
             //thirdBox.setBackgroundColor(ContextCompat.getColor(this, R.color.GrayF2));
-            thirdBox.setBackground(getResources().getDrawable(R.drawable.grayf2_noleftbordered_button));
+//            thirdBox.setBackground(getResources().getDrawable(R.drawable.grayf2_noleftbordered_button));
             SenderName = "first";
         }
         if (SenderName.equals("first") && SenderName != null) {
@@ -146,7 +146,7 @@ public class FiltersActivity extends AppCompatActivity
 
 
             //secondBox.setBackgroundColor(ContextCompat.getColor(this, R.color.GrayF2));
-            secondBox.setBackground(getResources().getDrawable(R.drawable.grayf2_noleftbordered_button));
+//            secondBox.setBackground(getResources().getDrawable(R.drawable.grayf2_noleftbordered_button));
             SenderName = "zero";
 
         } else

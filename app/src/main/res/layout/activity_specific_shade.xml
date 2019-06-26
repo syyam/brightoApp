@@ -1,28 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
+
+<RelativeLayout
+    android:id="@+id/backColor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SpecificShade">
-
-
-    <LinearLayout
-        android:id="@+id/backColor"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="4">
-
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dip"
-            android:layout_weight="3"
-            android:gravity="bottom"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnCombination"
             android:orientation="vertical"
+            android:layout_marginBottom="40dp"
             android:paddingLeft="20sp"
 
             >
@@ -32,8 +27,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="SUNNY"
+                android:textStyle="bold"
                 android:textColor="#000"
                 android:textSize="16sp" />
+            <TextView
+                android:id="@+id/itemCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textStyle="bold"
+                android:text="1-10-3"
+                android:textColor="#000" />
 
             <TextView
                 android:id="@+id/productName"
@@ -41,34 +45,26 @@
                 android:layout_height="wrap_content"
                 android:text="Metallic"
                 android:textColor="#000"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
                 android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/itemCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1-10-3"
-                android:textColor="#000" />
+
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:text="asldalsdasndlneonefn efnoefnownffdfdf"
                 android:textColor="#000"
+                android:layout_marginTop="5dp"
                 android:textSize="12sp" />
 
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dip"
-            android:layout_weight="1"
-            android:gravity="center|bottom"
-            android:orientation="vertical"
 
-            >
 
 
             <Button
@@ -79,24 +75,14 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:textAllCaps="true"
+                android:textSize="16sp"
+                android:layout_alignParentBottom="true"
                 android:background="@color/colorPrimary"
-                android:text="COMBINATIONS"
+                android:text="Create COMBINATIONS"
                 android:textColor="#fff"
 
                 />
-        </LinearLayout>
-    </LinearLayout>
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/GrayF2"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main"
-        app:itemIconTint="@color/colorPrimary"
-        app:itemTextColor="@color/Gray96"
-        app:menu="@menu/activity_main_drawer" />
+    </RelativeLayout>
 
-</android.support.v4.widget.DrawerLayout>

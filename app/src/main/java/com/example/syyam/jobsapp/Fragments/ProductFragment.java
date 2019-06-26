@@ -129,7 +129,8 @@ public class ProductFragment extends Fragment {
 
                 if (response != null) {
                     Products list = response.body();
-                    recyclerView.setAdapter(new ProductAdapter(getContext(), list.getData(), cid, true, null));
+                    if (list != null)
+                        recyclerView.setAdapter(new ProductAdapter(getContext(), list.getData(), cid, true, null));
 
                     //Toast.makeText(getContext(), "success",Toast.LENGTH_LONG).show();
                 }

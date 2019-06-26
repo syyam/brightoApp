@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +19,8 @@ import com.example.syyam.jobsapp.Fragments.ColorFinderFragment;
 import com.example.syyam.jobsapp.Models.Datum;
 
 import java.util.List;
+
+import static java.security.AccessController.getContext;
 
 public class ColorFinderAdapter extends RecyclerView.Adapter<ColorFinderAdapter.CF_ViewHolder> {
 
@@ -65,13 +70,22 @@ public class ColorFinderAdapter extends RecyclerView.Adapter<ColorFinderAdapter.
         holder.mLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent s = new Intent(view.getContext(), ColorShadesActivity.class);
 
-                int a = colors.getId();
-                s.putExtra("color_id", colors.getId().toString());
-                s.putExtra("country_id", cid + "");
+             BottomSheetBehavior mBottomSheetBehavior;
+                ColorShadesActivity bottomSheetFragment = new ColorShadesActivity();
 
-                view.getContext().startActivity(s);
+                Bundle bundle=new Bundle();
+                bundle.putString("color_id", colors.getId().toString());
+                bundle.putString("country_id", cid + "");
+                bottomSheetFragment.setArguments(bundle);
+                bottomSheetFragment.show(context.getFragmentManager(), bottomSheetFragment.getTag());
+//                Intent s = new Intent(view.getContext(), ColorShadesActivity.class);
+//
+//                int a = colors.getId();
+//                s.putExtra("color_id", colors.getId().toString());
+//                s.putExtra("country_id", cid + "");
+//
+//                view.getContext().startActivity(s);
 
 
             }
@@ -97,4 +111,7 @@ public class ColorFinderAdapter extends RecyclerView.Adapter<ColorFinderAdapter.
             mLinearLayout = itemView.findViewById(R.id.colorRow);
         }
     }
+
+
+
 }

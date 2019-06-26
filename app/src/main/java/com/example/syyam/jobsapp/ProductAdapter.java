@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.syyam.jobsapp.Models.ProductsDatum;
 import com.example.syyam.jobsapp.Utils.Config;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -48,9 +49,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.CF_ViewH
 
 
         final ProductsDatum colors = this.colors.get(position);
-
         String topText = colors.getName().toString();
         String bottomText = colors.getDescription().toString();
+
         final int pid= colors.getId();
 
 //        SharedPreferences prefs = holder.mContext.getSharedPreferences("Country", holder.mContext.MODE_PRIVATE);

@@ -51,7 +51,7 @@ public class StoreDealerCityAdapter extends RecyclerView.Adapter<StoreDealerCity
         holder.countrycityLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context.getContext(), MapActivity.class);
+                Intent intent=new Intent(context, MapActivity.class);
                 intent.putExtra("lat",dealercities.getLatitude());
                 intent.putExtra("lng",dealercities.getLongitude());
                 context.startActivity(intent);

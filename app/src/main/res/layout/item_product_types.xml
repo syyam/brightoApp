@@ -42,14 +42,15 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="5dp">
+                >
 
                 <TextView
                     android:id="@+id/topTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="18dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="asdasd"
+                    android:padding="5dp"
                     android:textColor="@color/Gray41"
                     android:textSize="15sp" />
 

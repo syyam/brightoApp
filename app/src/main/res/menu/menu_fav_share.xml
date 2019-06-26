@@ -8,17 +8,12 @@
         app:showAsAction="always"
         android:title="" />
 
-    <!--<item-->
-        <!--android:id="@+id/action_share"-->
-        <!--android:orderInCategory="100"-->
-        <!--android:icon="@mipmap/top_share"-->
-        <!--app:showAsAction="always"-->
-        <!--/>-->
-
     <item
-        android:id="@+id/action_back"
-        android:orderInCategory="100"
-        android:icon="@mipmap/top_back"
-        app:showAsAction="always"
+    android:id="@+id/action_share"
+    android:orderInCategory="100"
+    android:icon="@mipmap/top_share"
+    app:showAsAction="always"
         android:title="" />
+
+
 </menu>
