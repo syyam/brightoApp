@@ -166,14 +166,15 @@ public class StoreFragment extends Fragment implements StoreAdapter.AdapterCallb
             public void onResponse(Call<Countries> call, Response<Countries> response) {
 
                 Countries list = response.body();
-                recyclerView.setAdapter(new StoreAdapter(getContext(), list.getData(), (StoreAdapter.AdapterCallback) StoreFragment.this));
+                if (list != null)
+                    recyclerView.setAdapter(new StoreAdapter(getContext(), list.getData(), (StoreAdapter.AdapterCallback) StoreFragment.this));
 
                 //Toast.makeText(getContext(), "success",Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Call<Countries> call, Throwable t) {
-                //Toast.makeText(CountryActivity.this, "Failure", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Check your internet connection!", Toast.LENGTH_LONG).show();
             }
         });
     }

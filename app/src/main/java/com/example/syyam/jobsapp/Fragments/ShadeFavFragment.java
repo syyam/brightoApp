@@ -77,7 +77,7 @@ public class ShadeFavFragment extends Fragment {
 
             @Override
             public void onFailure(Call<LikedShades> call, Throwable t) {
-                Toast.makeText(getContext(), "Failure", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Check your internet connection!", Toast.LENGTH_LONG).show();
             }
         });
 

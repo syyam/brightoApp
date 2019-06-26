@@ -56,11 +56,12 @@ public class ColorShadesAdapter extends RecyclerView.Adapter<ColorShadesAdapter.
         holder.mTextView.setText(colors.getName());
         holder.mCardView.setBackgroundColor(Color.rgb(R, G, B));
 
-        if(callback == null) {
+        if (callback == null) {
             holder.mLinearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent s = new Intent(view.getContext(), SpecificShade.class);
+                    int id = colors.getProducts().get(0).getId();
                     s.putExtra("sid", colors.getId().toString());
                     s.putExtra("R", colors.getColor().getR().toString());
                     s.putExtra("G", colors.getColor().getG().toString());
@@ -68,11 +69,13 @@ public class ColorShadesAdapter extends RecyclerView.Adapter<ColorShadesAdapter.
                     s.putExtra("name", colors.getName());
                     s.putExtra("desc", colors.getDescription());
                     s.putExtra("itemCode", colors.getItemCode());
+                    s.putExtra("pname", colors.getProducts().get(0).getName());
+                    s.putExtra("pid", id + "");
+
                     view.getContext().startActivity(s);
                 }
             });
-        }
-        else{
+        } else {
             holder.mLinearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

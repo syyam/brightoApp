@@ -108,6 +108,7 @@ public class LuxuryFinishesActivity extends AppCompatActivity implements View.On
     }
 
 
+<<<<<<< Updated upstream
     private void sliderImage() {
         List<String> imageList = new ArrayList<>();
         imageList.add(data.getImage1());
@@ -143,4 +144,6 @@ public class LuxuryFinishesActivity extends AppCompatActivity implements View.On
             Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
         }
     }
+=======
+>>>>>>> Stashed changes
 }

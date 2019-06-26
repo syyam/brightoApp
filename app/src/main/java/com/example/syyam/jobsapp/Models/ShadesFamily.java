@@ -1,9 +1,9 @@
 package com.example.syyam.jobsapp.Models;
 
-import java.util.List;
+        import java.util.List;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+        import com.google.gson.annotations.Expose;
+        import com.google.gson.annotations.SerializedName;
 
 public class ShadesFamily {
 

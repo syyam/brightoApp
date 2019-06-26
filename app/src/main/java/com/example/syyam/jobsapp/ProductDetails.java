@@ -232,14 +232,15 @@ public class ProductDetails extends AppCompatActivity implements NavigationView.
                     Glide.with(ProductDetails.this).load(cvr_imgurl).into(cover);
 
 
-                    getFurtherData(p_id);
+                        getFurtherData(p_id);
 //                    Toast.makeText(ProductDetails.this, "success"+data,Toast.LENGTH_LONG).show();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<ProductDetailCity> call, Throwable t) {
-                Toast.makeText(ProductDetails.this, "Failure", Toast.LENGTH_LONG).show();
+                Toast.makeText(ProductDetails.this, "Check your internet connection!", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -266,7 +267,7 @@ public class ProductDetails extends AppCompatActivity implements NavigationView.
                 if (response != null) {
                     ShadesProduct list = response.body();
                     recyclerView.setAdapter(new ProductDetailsAdapter(ProductDetails.this, list.getData(), p_id));
-
+ø
 //                    Toast.makeText(ProductDetails.this, "success"+data,Toast.LENGTH_LONG).show();
                 }
             }
@@ -274,7 +275,7 @@ public class ProductDetails extends AppCompatActivity implements NavigationView.
             @Override
             public void onFailure(Call<ShadesProduct> call, Throwable t) {
                 Extras.hideLoader();
-                Toast.makeText(ProductDetails.this, "Failure", Toast.LENGTH_LONG).show();
+                Toast.makeText(ProductDetails.this, "Check your internet connection!", Toast.LENGTH_LONG).show();
             }
         });
     }

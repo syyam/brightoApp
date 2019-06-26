@@ -179,6 +179,8 @@ public interface API {
     @POST("favourite/pallets/unlike")
     Call<Like> getUnLikePalettes(@Header("Authorization") String token, @Body PaletteParam paletteParam);
 
+
+
     //users
     @PUT("user/id")
     Call<Like> putUpdateUser(@Body UpdateUserParam updateUserParam);

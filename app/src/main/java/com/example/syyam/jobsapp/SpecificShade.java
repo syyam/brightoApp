@@ -3,28 +3,14 @@ package com.example.syyam.jobsapp;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
-import android.support.annotation.NonNull;
-import android.support.design.internal.NavigationMenuView;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,7 +18,6 @@ import android.widget.Toast;
 import com.example.syyam.jobsapp.Models.Like;
 import com.example.syyam.jobsapp.Models.SpecificShadeModel.SpecificShadeModel;
 import com.example.syyam.jobsapp.Models.params.IdParam;
-import com.example.syyam.jobsapp.Models.params.ProductParam;
 import com.example.syyam.jobsapp.Models.params.ShadeParam;
 import com.example.syyam.jobsapp.Utils.Config;
 import com.example.syyam.jobsapp.Utils.Extras;
@@ -43,23 +28,24 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class SpecificShade extends AppCompatActivity  {
+public class SpecificShade extends AppCompatActivity {
 
     private Menu mMenu;
     private Boolean loved = false;
-    int r, g, b, s_id;
-    String name, desc, itemCode;
+    int r, g, b, s_id, p_id;
+    String pname;
+    String name, desc, itemCode, pName;
     RelativeLayout linearLayout;
     TextView nameTV, descTV, itemcodeTV, productName;
+    private Button btnCombination;
     private Toolbar toolbar;
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_specific_shade);
-        toolbar=findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_cancel_black_24dp));
@@ -76,12 +62,16 @@ public class SpecificShade extends AppCompatActivity  {
                 getIntent().hasExtra("name") &&
                 getIntent().hasExtra("desc") &&
                 getIntent().hasExtra("sid") &&
-                getIntent().hasExtra("itemCode")) {
+                getIntent().hasExtra("pid") &&
+                getIntent().hasExtra("itemCode") &&
+                getIntent().hasExtra("pname")) {
 
             String R = getIntent().getStringExtra("R");
             String G = getIntent().getStringExtra("G");
             String B = getIntent().getStringExtra("B");
             String SID = getIntent().getStringExtra("sid");
+            String PID = getIntent().getStringExtra("pid");
+            String PNAME = getIntent().getStringExtra("pname");
 
             String getName = getIntent().getStringExtra("name");
             String getDesc = getIntent().getStringExtra("desc");
@@ -95,14 +85,20 @@ public class SpecificShade extends AppCompatActivity  {
                             !TextUtils.isEmpty(getName) &&
                             !TextUtils.isEmpty(getDesc) &&
                             !TextUtils.isEmpty(SID) &&
+                            //!TextUtils.isEmpty(PID) &&
+                            !TextUtils.isEmpty(PNAME) &&
                             !TextUtils.isEmpty(getItemCode)
-            ) {
+                    ) {
 
                 r = Integer.parseInt(getIntent().getStringExtra("R"));
                 g = Integer.parseInt(getIntent().getStringExtra("G"));
                 b = Integer.parseInt(getIntent().getStringExtra("B"));
-                s_id = Integer.parseInt(getIntent().getStringExtra("sid"));
+                //p_id = Integer.parseInt(getIntent().getStringExtra("PID"));
 
+                s_id = Integer.parseInt(SID);
+                p_id = Integer.parseInt(PID);
+
+                pname = PNAME;
                 name = getIntent().getStringExtra("name");
                 desc = getIntent().getStringExtra("desc");
                 itemCode = getIntent().getStringExtra("itemCode");
@@ -117,11 +113,42 @@ public class SpecificShade extends AppCompatActivity  {
         descTV = (TextView) findViewById(R.id.description);
         itemcodeTV = (TextView) findViewById(R.id.itemCode);
         productName = (TextView) findViewById(R.id.productName);
+        btnCombination = (Button) findViewById(R.id.btnCombination);
 
-        linearLayout.setBackgroundColor(Color.rgb(r, g, b));
-        nameTV.setText(name);
-        descTV.setText(desc);
-        itemcodeTV.setText(itemCode);
+
+        if (p_id != -1) {
+            productName.setText(pname);
+            linearLayout.setBackgroundColor(Color.rgb(r, g, b));
+            nameTV.setText(name);
+            descTV.setText(desc);
+            itemcodeTV.setText(itemCode);
+        } else { // agar koi esi activity ise call kar rae he jo pid pass nae karti
+            linearLayout.setBackgroundColor(Color.rgb(r, g, b));
+            nameTV.setText(name);
+            descTV.setText(desc);
+            itemcodeTV.setText(itemCode);
+
+            Data();
+        }
+
+
+        //productName.setText(pName);
+
+        btnCombination.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent l = new Intent(SpecificShade.this, ColorCombination.class);
+                l.putExtra("p_id", p_id + ""); // pid dalni he
+                l.putExtra("r", r + "");
+                l.putExtra("g", g + "");
+                l.putExtra("b", b + "");
+                l.putExtra("name", name + "");
+                l.putExtra("itemCode", itemCode + "");
+                l.putExtra("productName", pname + "");
+
+                startActivity(l);
+            }
+        });
 
 //        Data();
 
@@ -155,16 +182,20 @@ public class SpecificShade extends AppCompatActivity  {
                     SpecificShadeModel list = response.body();
 
 
-                    int _r = list.getData().get(0).getColor().getR();
-                    int _g = list.getData().get(0).getColor().getG();
-                    int _b = list.getData().get(0).getColor().getB();
+                    btnCombination.setVisibility(View.VISIBLE);
 
-                    linearLayout.setBackgroundColor(Color.rgb(_r, _g, _b));
-                    nameTV.setText(list.getData().get(0).getName().toString());
-                    descTV.setText(list.getData().get(0).getDescription());
-                    itemcodeTV.setText(list.getData().get(0).getItemCode());
-                    descTV.setText(list.getData().get(0).getDescription());
-                    if (list.getData().get(0).getProducts().size()!=0 )
+//                    int _r = list.getData().get(0).getColor().getR();
+//                    int _g = list.getData().get(0).getColor().getG();
+//                    int _b = list.getData().get(0).getColor().getB();
+
+                    p_id = list.getData().get(0).getProducts().get(0).getId();
+//                    linearLayout.setBackgroundColor(Color.rgb(_r, _g, _b));
+//                    nameTV.setText(list.getData().get(0).getName().toString());
+//                    //descTV.setText(list.getData().get(0).getDescription());
+//                    itemcodeTV.setText(list.getData().get(0).getItemCode());
+//                    descTV.setText(list.getData().get(0).getProducts().get(0).getName());
+
+                    if (list.getData().get(0).getProducts().size() != 0)
                         productName.setText(list.getData().get(0).getProducts().get(0).getName());
                     //Toast.makeText(getContext(), "success",Toast.LENGTH_LONG).show();
                 }
@@ -288,10 +319,8 @@ public class SpecificShade extends AppCompatActivity  {
     }
 
 
-
-
 //        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
 
-
 }
+

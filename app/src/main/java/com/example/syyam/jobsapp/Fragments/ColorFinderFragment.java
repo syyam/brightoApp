@@ -86,7 +86,8 @@ public class ColorFinderFragment extends Fragment {
                 Extras.hideLoader();
                 if (response != null) {
                     ColorFinder list = response.body();
-                    recyclerView.setAdapter(new ColorFinderAdapter(ColorFinderFragment.this, list.getData(), cid));
+                    if (list != null)
+                        recyclerView.setAdapter(new ColorFinderAdapter(ColorFinderFragment.this, list.getData(), cid));
 
                     //Toast.makeText(getContext(), "success",Toast.LENGTH_LONG).show();
                 }
@@ -95,7 +96,7 @@ public class ColorFinderFragment extends Fragment {
             @Override
             public void onFailure(Call<ColorFinder> call, Throwable t) {
                 Extras.hideLoader();
-                Toast.makeText(getContext(), "Failure", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Check your internet connection!", Toast.LENGTH_LONG).show();
             }
         });
     }

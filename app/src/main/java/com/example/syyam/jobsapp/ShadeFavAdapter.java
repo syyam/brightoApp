@@ -72,6 +72,8 @@ public class ShadeFavAdapter extends RecyclerView.Adapter<ShadeFavAdapter.CF_Vie
                 s.putExtra("name", countries.getName());
                 s.putExtra("desc", countries.getDescription());
                 s.putExtra("itemCode", countries.getItemCode());
+                s.putExtra("pname", "handleme"); //handle
+                s.putExtra("pid", "-1"); //handle
                 v.getContext().startActivity(s);
 
             }
@@ -104,7 +106,6 @@ public class ShadeFavAdapter extends RecyclerView.Adapter<ShadeFavAdapter.CF_Vie
         private ImageView loveImg;
         private ImageView imagePF;
         private LinearLayout LL;
-
 
 
         public CF_ViewHolder(View itemView) {

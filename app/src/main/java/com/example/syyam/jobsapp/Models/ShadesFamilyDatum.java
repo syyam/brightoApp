@@ -3,6 +3,8 @@ package com.example.syyam.jobsapp.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class ShadesFamilyDatum {
 
     @SerializedName("id")
@@ -26,6 +28,9 @@ public class ShadesFamilyDatum {
     @SerializedName("color")
     @Expose
     private Colors color;
+    @SerializedName("Products")
+    @Expose
+    private List<ProductName> products = null;
 
     public Integer getId() {
         return id;
@@ -73,6 +78,14 @@ public class ShadesFamilyDatum {
 
     public void setIsRM(Boolean isRM) {
         this.isRM = isRM;
+    }
+
+    public List<ProductName> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<ProductName> products) {
+        this.products = products;
     }
 
     public Colors getColor() {

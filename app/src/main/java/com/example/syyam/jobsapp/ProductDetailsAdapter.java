@@ -72,6 +72,8 @@ public class ProductDetailsAdapter extends RecyclerView.Adapter<ProductDetailsAd
                 s.putExtra("name", colors.getName());
                 s.putExtra("desc", colors.getDescription());
                 s.putExtra("itemCode", colors.getItemCode());
+                s.putExtra("pname", colors.getProducts().get(0).getName());
+                s.putExtra("pid", colors.getProducts().get(0).getId()+"");
                 view.getContext().startActivity(s);
 
 
