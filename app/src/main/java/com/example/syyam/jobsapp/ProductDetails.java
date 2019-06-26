@@ -267,7 +267,7 @@ public class ProductDetails extends AppCompatActivity implements NavigationView.
                 if (response != null) {
                     ShadesProduct list = response.body();
                     recyclerView.setAdapter(new ProductDetailsAdapter(ProductDetails.this, list.getData(), p_id));
-ø
+
 //                    Toast.makeText(ProductDetails.this, "success"+data,Toast.LENGTH_LONG).show();
                 }
             }
